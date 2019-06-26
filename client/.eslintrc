@@ -1,0 +1,50 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": ["airbnb", "plugin:prettier/recommended"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["react-app", "jsx-a11y", "prettier"],
+    "rules": {
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".js", ".jsx"]
+            }
+        ],
+        "constructor-super": "warn",
+        "import/imports-first": ["error", "absolute-first"],
+        "import/newline-after-import": "error",
+        "indent": ["error", 4],
+        "no-const-assign": "warn",
+        "no-extra-semi": "error",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-underscore-dangle": 0,
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "prettier/prettier": "error",
+        "quotes": ["error", "single"],
+        "react/prop-types": 0,
+        "semi": ["error", "always"],
+        "valid-typeof": "warn"
+    },
+    "globals": {
+        "window": true,
+        "document": true,
+        "localStorage": true,
+        "FormData": true,
+        "FileReader": true,
+        "Blob": true,
+        "navigator": true
+    }
+}
