@@ -1,5 +1,4 @@
 const axios = require('axios');
-const model = require('./../../model');
 
 module.exports = () => {
     router.post('/', async (req, res) => {
