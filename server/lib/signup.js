@@ -1,6 +1,5 @@
 const axios = require('axios');
 const basicAuth = require('express-basic-auth');
-const UserSchema = require('./../model/user_schema');
 
 
 //TODO(Taeyoung) : chanage var name
