@@ -18,7 +18,7 @@ Schema.createSchema = function(mongoose){
         return email.lenghth;
     }, 'have no email');
 
-    
+    UserSchema.path('average_working_time')
 
     return UserSchema;
 
