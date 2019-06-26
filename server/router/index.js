@@ -3,8 +3,8 @@ const router = express.Router();
 const config = require('./../config/config.json');
 const version = config.version;
 
-module.exports = () => {
-    const signUp = require('./' + version + '/signup');
+const signUp = require('./' + version + '/signup');
 
-    router.use('./' + version + '/signup.js', signUp);
-};
+router.use('/' + version + '/signup', signUp);
+
+module.exports = router;

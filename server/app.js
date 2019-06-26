@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const config = require('./config/config.json');
 const rootRouter = require('./router/index.js');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 
@@ -23,7 +24,10 @@ function connectDB() {
     });
 }
 
+app.use(bodyParser.json());
+
 app.use('/api', rootRouter);
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
 app.listen(config.port, () => {
     console.log('server start');
