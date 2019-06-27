@@ -77,7 +77,7 @@ module.exports = () => {
         }
         ProjectModel.deleteOne({
             _id: req.params.id
-        }, (err,docs) => {
+        }, (err) => {
             if (err) {
                 throw err;
             };
