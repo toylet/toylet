@@ -3,7 +3,7 @@ import Editor, { OnChange, Theme } from 'rich-markdown-editor';
 
 import styles from './NewPost.module.scss';
 
-const markdownTest = `
+const markdownTemplate = `
 # Summary
 ## Task 1
 
@@ -101,7 +101,7 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                     <div className={styles.editor}>
                         <Editor
                             onChange={this.onChange}
-                            defaultValue={markdownTest}
+                            defaultValue={markdownTemplate}
                             theme={light}
                         />
                     </div>
