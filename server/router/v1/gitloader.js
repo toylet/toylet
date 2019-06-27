@@ -2,6 +2,9 @@ const UserModel = require('../../models/user');
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
+
 
 module.exports = () => {
     router.use((res, req, next) => {
@@ -12,10 +15,8 @@ module.exports = () => {
         if (!req.header('token')) {
             res.status(401).json({ success: 0 });
         };
-        // get userName !!!
-        //input = gitToken
-        //TODO(Taeyoung) : change these dummy data
-        const gitToken = '33b0c3c66cc2b3e7c11f4617f042d79822de5636';
+        // const gitToken = req.body.gitToken;
+        const gitToken = '99a1440abb79ed07664949a75e4bb41e332cf2e9';
         const BASEURL = 'https://api.github.com/user'
 
         const result = await axios.get(BASEURL + '/repos', {
@@ -27,10 +28,32 @@ module.exports = () => {
             res.status(400).json({ success: 0 });
         });
 
+        const user = await axios.get(BASEURL, {
+            headers: {
+                'Authorization': 'token ' + gitToken
+            }
+        }).catch((err) => {
+            console.log(err);
+            res.status(400).json({ success: 0 });
+        });
+
+        const userName = user.data.login;
+
+        UserModel.findOneAndUpdate({
+            _id: req.header('token')
+        }, {
+                $set: {
+                    gittoken: gitToken,
+                    gitId: userName
+                }
+            }).catch((err) => {
+                console.log(err);
+                res.json({ success: 0 });
+            });
+
         var URLs = {
             'urls': []
         };
-
         for (i = 0; i < result.data.length; ++i) {
             URLs.urls.push(result.data[i].full_name);
         }
@@ -39,7 +62,6 @@ module.exports = () => {
 
     router.put('/userrepo', async (req, res) => {
         // req.body=> reponame
-        
 
     });
 
@@ -54,33 +76,26 @@ module.exports = () => {
         const repoName = 'toylet';
         // const repoName = req.body.reponame;
         const ownerName = 'toylet'
-        const gitToken = '33b0c3c66cc2b3e7c11f4617f042d79822de5636';
+
+        const user = await UserModel.findOne({ _id: req.header('token') });
         const result = await axios.get(BASEURL + '/repos/' + ownerName + '/' + repoName + '/commits', {
             headers: {
-                'Authorization': 'token ' + gitToken
+                'Authorization': 'token ' + user.gittoken
             }
         }).catch((err) => {
             console.log(err);
             res.status(400).json({ success: 0 });
         });
 
-        const len = result.data.length;
-
-        // for (i = 0; i < len; ++i) {
-        //     console.log(result.data[i].commit.message);
-        //     console.log(result.data[i].commit.author.name);
-        // }
-        // console.log(result.data.commit);
-
         var commits = {
             'commit': []
         };
-        
+
+        const len = result.data.length;
         for (i = 0; i < len; ++i) {
             const today = new Date().toLocaleDateString();
             const commitDay = new Date(result.data[i].commit.author.date).toLocaleDateString();
-            // name check here
-            if (today == commitDay) {
+            if (today == commitDay && result.data[i].commit.author.name == user.gitId) {
                 commits.commit.push({
                     'timestamp': result.data[i].commit.author.date,
                     'message': result.data[i].commit.message
