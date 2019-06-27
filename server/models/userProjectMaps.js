@@ -1,4 +1,4 @@
-const mongoose = requre('mongoose');
+const mongoose = require('mongoose');
 
 const UserProjectMapSchema = new mongoose.Schema({
     ownerId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
@@ -13,6 +13,6 @@ const UserProjectMapSchema = new mongoose.Schema({
     isOwner: { type: Boolean, requied: true }
 });
 
-const UserProjectMapModel = mongoose.model('projects', UserProjectMapSchema);
+const UserProjectMapModel = mongoose.model('maps', UserProjectMapSchema);
 
 module.exports = UserProjectMapModel;
