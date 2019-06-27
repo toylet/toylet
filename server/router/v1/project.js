@@ -11,7 +11,7 @@ module.exports = () => {
 
     router.post('/', (req, res) => {
         if (!req.header('token')) {
-            res.status(401);
+            res.status(401).json({ success: 0 });
         }
 
         const newProject = new ProjectModel({
@@ -20,7 +20,7 @@ module.exports = () => {
             projtype: req.body.projtype,
             title: req.body.title,
             recruiting: req.body.recruiting,
-            website: req.body.website
+            repo: req.body.repo
         });
 
         newProject.save((err) => {
@@ -51,7 +51,7 @@ module.exports = () => {
 
     router.get('/', (req, res) => {
         if (!req.header('token')) {
-            res.status(401);
+            res.status(401).json({ success: 0 });
         }
         ProjectModel.find({
             owners: req.header('token')
@@ -69,7 +69,7 @@ module.exports = () => {
 
     router.put('/:id', (req, res) => {
         if (!req.header('token')) {
-            res.status(401);
+            res.status(401).json({ success: 0 });
         }
         ProjectModel.findOneAndUpdate({
             _id: req.params.id
@@ -95,7 +95,7 @@ module.exports = () => {
 
     router.delete('/:id', (req, res) => {
         if (!req.header('token')) {
-            res.status(401);
+            res.status(401).json({ success: 0 });
         }
         MapsModel.find({
             projectId: req.params.id
