@@ -4,12 +4,15 @@ import Editor, { OnChange, Theme } from 'rich-markdown-editor';
 import styles from './NewPost.module.scss';
 
 const markdownTest = `
-# Header 1
-## Header 2
+# Summary
+## Task 1
 
-asdfasd
-fasdf
-asdf
+Write your task's description
+
+# Next Day TODOs
+- A
+- B
+- C
 `;
 
 const colors = {
@@ -89,8 +92,8 @@ export default class NewPost extends React.Component<{}, { v: string }> {
 
     render() {
         return (
-            <div>
-                <div>
+            <div className={styles.container}>
+                <div className={styles.header}>
                     <input placeholder="Title" />
                     <span>Save</span>
                 </div>

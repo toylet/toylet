@@ -17,7 +17,7 @@ class App extends Component<{}, {}> {
     render() {
         const token = localStorage.getItem('token');
         return (
-            <div className={styles.App}>
+            <div style={{ height: '100vh'}}>
                 <Router>
                     <Switch>
                         <AuthRoute
