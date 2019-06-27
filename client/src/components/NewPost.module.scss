@@ -1,0 +1,219 @@
+@import '../index.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+
+    height: 100%;
+
+    overflow-y: scroll;
+
+    background-color: #f5f6f7;
+}
+
+.header {
+    flex: none;
+    justify-self: stretch;
+    height: 268px;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+}
+
+.headerTextContainer {
+    flex: 1;
+    max-width: 1200px;
+
+    padding-top: 110px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.headerTextInput {
+    border: 0;
+
+    font-family: 'Fredoka One', cursive;
+    font-size: 64px;
+
+    &::placeholder {
+        color: $unimportant;
+    }
+}
+
+.headerTextDate {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+
+    color: rgba(12, 28, 45, 0.5);
+}
+
+.saveButton {
+    position: absolute;
+    right: 0px;
+    bottom: -30px;
+
+    width: 177px;
+
+    border-radius: 42px;
+    box-shadow: 0 8px 16px 0 rgba(99, 174, 255, 0.5);
+    background-color: $primary;
+
+    padding: 18px 0;
+}
+
+.saveIcon {
+    margin-left: 24px;
+}
+
+.saveText {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+
+    color: white;
+
+    margin-left: 28px;
+}
+
+.bodyContainer {
+    padding: 66px 0;
+    margin: 0 auto;
+
+    max-width: 1200px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+.editPanel {
+    flex: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+}
+
+.editor {
+    flex: auto;
+
+    padding: 48px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+    background-color: white;
+
+    font-size: 1.33333em;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: 'Fredoka One', cursive;
+    }
+
+    strong {
+        font-weight: 700;
+    }
+}
+
+.history {
+    font-family: 'Fredoka One', cursive;
+    font-size: 32px;
+    color: $text;
+
+    margin-top: 48px;
+
+    padding: 36px 48px;
+
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.historyTitle {
+    margin-left: 18px;
+}
+
+.githubBlackIcon {
+    path {
+        fill: black;
+    }
+}
+
+.sidebar {
+    flex: none;
+    max-width: 272px;
+    margin-left: 30px;
+    width: 270px;
+
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+}
+
+.connectGitHub {
+    padding: 24px;
+
+    margin-bottom: 30px;
+
+    display: flex;
+    align-items: center;
+
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    color: white;
+
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 4px #333333;
+    background-color: #333333;
+}
+
+.connectGitHubText {
+    margin: 0 12px;
+}
+
+.tips {
+    padding: 24px;
+    padding-top: 26px;
+
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.tipIcon {
+    margin-bottom: 10px;
+}
+
+.tipTitle {
+    padding-bottom: 12px;
+
+    font-family: 'Fredoka One', cursive;
+    font-size: 32px;
+    color: $text;
+}
+
+.tipPoint {
+    margin-top: 36px;
+
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    color: $text;
+}
+
+.tipDesc {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+    color: rgba(12, 28, 45, 0.5);
+}

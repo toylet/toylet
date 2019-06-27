@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from './App.module.scss';
 import {
     BrowserRouter as Router,
     Route,
@@ -14,6 +15,10 @@ import ProjectDetail from './components/ProjectDetail';
 import Signup from './components/Signup/';
 import AdditionInfo from './components/AdditionInfo';
 import Optional from './components/Optional'
+import ProjectList from './components/ProjectList';
+import NewPost from './components/NewPost';
+import { Provider } from 'react-redux';
+import configureStore from './store';
 
 WebFont.load({
     google: {
@@ -21,15 +26,28 @@ WebFont.load({
     }
 });
 
+const store = configureStore();
+
+
 class App extends Component<{}, {}> {
 	render() {
         return (
             <div>
+                <Provider store={store}>
                 <Router>
                     <Switch>
                         <AuthRoute
                             path="/login"
                             component={Login}
+                        />
+                        <PrivateRoute
+                            path="/projects/:id/new-post"
+                            component={NewPost}
+                        />
+                        <PrivateRoute
+                            exact
+                            path="/"
+                            component={ProjectList}
                         />
 						<AuthRoute
                             path="/signup"
@@ -58,6 +76,7 @@ class App extends Component<{}, {}> {
                         <Redirect to="/" />
                     </Switch>
                 </Router>
+                </Provider>
             </div>
         );
     }
@@ -68,14 +87,12 @@ class AuthRoute<P extends RouteProps = RouteProps> extends Component<
 > {
     render() {
 		const { component: Comp, ...rest } = this.props;
-		
+
         const token = localStorage.getItem('token');
         return (
             <Route
                 {...rest}
                 render={props => {
-					console.log(token);
-					console.log(token ? 'has token' : 'no token')
                     return token ? (
                         <Redirect to={'/login'} />
                     ) : (
@@ -93,13 +110,12 @@ class PrivateRoute<P extends RouteProps = RouteProps> extends Component<
 > {
     render() {
 		const { component: Comp, ...rest } = this.props;
-		
+
         const token = localStorage.getItem('token');
         return (
             <Route
                 {...rest}
                 render={props => {
-					console.log(token);
                     return !token ? (
                         <Redirect to={'/login'} />
                     ) : (
