@@ -25,7 +25,8 @@
         "redux-thunk": "^2.3.0",
         "rich-markdown-editor": "^9.6.1",
         "typescript": "3.5.2",
-        "webfontloader": "^1.6.28"
+        "webfontloader": "^1.6.28",
+        "wretch": "^1.5.2"
     },
     "scripts": {
         "start": "react-scripts start",

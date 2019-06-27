@@ -38,12 +38,13 @@ module.exports = () => {
                 isOwner: true
             });
 
-            newMaps.save((err) => {
+            newMaps.save((err, doc) => {
                 if (err) {
                     throw err;
                 }
                 res.json({
-                    success: 1
+                    success: true,
+                    project: doc
                 });
             });
         });

@@ -13,6 +13,8 @@ import {Project} from '../../store/project/types';
 import ProjectCard from "../common/ProjectCard";
 import classNames from 'classnames/bind';
 
+import * as apis from '../../apis';
+
 const cx = classNames.bind(styles);
 
 type Props = RouteComponentProps &
@@ -22,28 +24,13 @@ type Props = RouteComponentProps &
 class MyProjects extends React.Component<Props> {
     componentDidMount(): void {
         this.props.requestProjectList();
-
-        // TODO:: Replace the mock fetch with the actual API fetch
-        setTimeout(() => {
+        apis.projectList().then(list => {
             this.props.setProjectList(
-                [
-                    {
-                        id: '123213',
-                        title: 'Damn Project'
-                    },
-                    {
-                        id: '3itmf309',
-                        title: 'Super Project'
-                    },
-                    {
-                        id: '1231234',
-                        title: 'Super P12312roject'
-                    }
-                ],
+                list,
                 0
             );
             this.props.endRequestProjectList();
-        }, 1400);
+        });
     }
 
     logout = () => {
@@ -58,7 +45,7 @@ class MyProjects extends React.Component<Props> {
     onSelectProject = (project: Project) => {
         return () => {
             this.props.selectProject(project);
-            this.props.history.push('/projects/' + project.id);
+            this.props.history.push('/projects/' + project._id);
         }
     };
 

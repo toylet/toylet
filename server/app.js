@@ -4,6 +4,7 @@ const config = require('./config/config.json');
 const rootRouter = require('./router/index')();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 mongoose.set('useCreateIndex', true);
 
 function connectDB() {
@@ -24,6 +25,7 @@ function connectDB() {
     });
 }
 
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false

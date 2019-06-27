@@ -24,36 +24,36 @@ class Discover extends React.Component<Props> {
         this.props.requestProjectList();
 
         // TODO:: Replace the mock fetch with the actual API fetch
-        setTimeout(() => {
-            this.props.setProjectList(
-                [
-                    {
-                        id: '123213',
-                        title: 'Damn Project'
-                    },
-                    {
-                        id: '3itmf309',
-                        title: 'Super Project'
-                    },
-                    {
-                        id: '1231234',
-                        title: 'Super P12312roject'
-                    },
-                    {
-                        id: '123123',
-                        title: 'Super P12312roject'
-                    }
-                ],
-                0
-            );
-            this.props.endRequestProjectList();
-        }, 1400);
+        // setTimeout(() => {
+        //     this.props.setProjectList(
+        //         [
+        //             {
+        //                 _id: '123213',
+        //                 title: 'Damn Project'
+        //             },
+        //             {
+        //                 _id: '3itmf309',
+        //                 title: 'Super Project'
+        //             },
+        //             {
+        //                 _id: '1231234',
+        //                 title: 'Super P12312roject'
+        //             },
+        //             {
+        //                 _id: '123123',
+        //                 title: 'Super P12312roject'
+        //             }
+        //         ],
+        //         0
+        //     );
+        //     this.props.endRequestProjectList();
+        // }, 1400);
     }
 
     onSelectProject = (project: Project) => {
         return () => {
             this.props.selectProject(project);
-            this.props.history.push('/projects/' + project.id);
+            this.props.history.push('/projects/' + project._id);
         }
     };
 
