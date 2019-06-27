@@ -16,32 +16,39 @@ const defaultNavProps: Pick<NavLinkProps, 'activeClassName' | 'className' | 'exa
 
 const Sidebar: React.FC = () => (
     <div className={cx('sidebar-wrapper')}>
-        <div className={cx('sidebar-header')}>
-            <ToyletLogo className={cx('sidebar-logo')}/>
-            <div className={cx('sidebar-profile')}/>
+        <div>
+            <div className={cx('sidebar-header')}>
+                <ToyletLogo className={cx('sidebar-logo')}/>
+                <div className={cx('sidebar-profile')}/>
+            </div>
+            <div className={cx('sidebar-menu-item-wrapper')}>
+                <NavLink
+                    to="/"
+                    {...defaultNavProps}
+                >
+                    <MyProjectsIcon/>
+                    My Projects
+                </NavLink>
+                <NavLink
+                    to="/discover"
+                    {...defaultNavProps}
+                >
+                    <DiscoverIcon/>
+                    Discover Projects
+                </NavLink>
+                <NavLink
+                    to="/hallofbest"
+                    {...defaultNavProps}
+                >
+                    <HallofBest/>
+                    Hall of Best Toyler
+                </NavLink>
+            </div>
         </div>
-        <div className={cx('sidebar-menu-item-wrapper')}>
-            <NavLink
-                to="/"
-                {...defaultNavProps}
-            >
-                <MyProjectsIcon/>
-                My Projects
-            </NavLink>
-            <NavLink
-                to="/discover"
-                {...defaultNavProps}
-            >
-                <DiscoverIcon/>
-                Discover Projects
-            </NavLink>
-            <NavLink
-                to="/hallofbest"
-                {...defaultNavProps}
-            >
-                <HallofBest/>
-                Hall of Best Toyler
-            </NavLink>
+        <div>
+            <a className={cx('sidebar-link')}>Logout</a>
+            <a className={cx('sidebar-link')}>About Toylet</a>
+            <a className={cx('sidebar-link')}>Open source licenses</a>
         </div>
     </div>
 );

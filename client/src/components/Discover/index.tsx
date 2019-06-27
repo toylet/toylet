@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from './MyProjects.module.scss';
+import styles from './Discover.module.scss';
 import {RouteComponentProps} from 'react-router-dom';
 import {AppState} from '../../store';
 import {connect} from 'react-redux';
@@ -19,7 +19,7 @@ type Props = RouteComponentProps &
     ReturnType<typeof mapStateToProps> &
     typeof actions;
 
-class MyProjects extends React.Component<Props> {
+class Discover extends React.Component<Props> {
     componentDidMount(): void {
         this.props.requestProjectList();
 
@@ -38,6 +38,10 @@ class MyProjects extends React.Component<Props> {
                     {
                         id: '1231234',
                         title: 'Super P12312roject'
+                    },
+                    {
+                        id: '123123',
+                        title: 'Super P12312roject'
                     }
                 ],
                 0
@@ -45,15 +49,6 @@ class MyProjects extends React.Component<Props> {
             this.props.endRequestProjectList();
         }, 1400);
     }
-
-    logout = () => {
-        localStorage.removeItem('token');
-        window.location.href = '/';
-    };
-
-    onClickLogout = () => {
-        this.logout();
-    };
 
     onSelectProject = (project: Project) => {
         return () => {
@@ -65,7 +60,7 @@ class MyProjects extends React.Component<Props> {
     render() {
         return (
             <div className={cx('container')}>
-                <h1 className={cx('section-title', 'projects-title')}>My Projects</h1>
+                <h1 className={cx('section-title', 'projects-title')}>Discover Projects</h1>
                 {
                     this.props.loading
                         ? (
@@ -107,4 +102,4 @@ const actions = {
 export default connect(
     mapStateToProps,
     actions
-)(MyProjects);
+)(Discover);

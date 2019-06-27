@@ -1,0 +1,51 @@
+@import '../../../styles/mixins';
+@import '../../../styles/colors';
+
+.project-card {
+  @include card;
+  padding: 1.75rem 2rem;
+  height: 15rem;
+  max-width: 20.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-top: 1rem;
+  flex-basis: 33%;
+
+  &-title {
+    font-size: 1.75rem;
+    margin: 0 0 .125rem;
+  }
+
+  &-type {
+    color: rgba($text, 0.5);
+    margin: 0 0 .125rem;
+  }
+
+  &-label {
+    color: rgba($text, 0.2);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  &-value {
+    color: rgba($text, 0.5);
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    > div {
+      display: flex;
+      > div:not(:first-child) {
+        margin-left: 2.625rem;
+      }
+    }
+  }
+}

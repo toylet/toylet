@@ -13,7 +13,7 @@ import ProjectDetail from './components/ProjectDetail';
 import Signup from './components/Signup/';
 import AdditionInfo from './components/AdditionInfo';
 import Optional from './components/Optional'
-import ProjectList from './components/MyProjects';
+import MyProjects from './components/MyProjects';
 import NewPost from './components/NewPost';
 import {Provider} from 'react-redux';
 import configureStore from './store';
@@ -46,7 +46,7 @@ class App extends Component<{}, {}> {
                             <PrivateRoute
                                 exact
                                 path="/"
-                                component={ProjectList}
+                                component={MyProjects}
                                 useSideLayout
                             />
                             <AuthRoute

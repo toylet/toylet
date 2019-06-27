@@ -1,8 +1,10 @@
-@import '../../../index';
+@import '../../../styles/colors';
 
 .sidebar-flex-wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .sidebar-logo {
@@ -10,9 +12,16 @@
   width: 5rem;
 }
 
+.sidebar-link {
+  display: block;
+  text-decoration: underline;
+  color: rgba($text, .5);
+  margin-top: 1rem;
+}
+
 .sidebar-wrapper {
   @extend .sidebar-flex-wrapper;
-  max-width: 27.25rem;
+  max-width: 22.25rem;
   width: 30%;
   padding: 3rem 2.25rem 2.5rem;
   background: white;
