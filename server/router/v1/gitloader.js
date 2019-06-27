@@ -1,3 +1,4 @@
+const UserModel = require('../../models/user');
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
@@ -12,10 +13,23 @@ module.exports = () => {
         if (!req.header('token')) {
             res.status(401);
         };
-        //input = gitToken
+
+
         const BASEURL = 'https://api.github.com/user'
-        //TODO(Taeyoung) : change these dummy data
         const gitToken = '72a641b36c2ec9a1a805cd96e191a3fecc3efba7';
+        
+        UserModel.findOneAndUpdate({
+            _id : req.header('token')
+        },{
+            $set: {
+                gittoken : gitToken
+            }
+        }, (err) => {
+            if (err) {
+                throw err;
+            };
+        });
+
         const result = await axios.get(BASEURL + '/repos', {
             headers: {
                 'Authorization': 'token ' + gitToken

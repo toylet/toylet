@@ -8,6 +8,8 @@ module.exports = () => {
     const project = require('./' + version + '/project')();
     const map = require('./' + version + '/map')();
     const gitloader = require('./' + version + '/gitloader')();
+    const imageUploader = require('./' + version + '/upload')();
+   
     router.use((req, res, next) => {
         next();
     });
@@ -16,6 +18,7 @@ module.exports = () => {
     router.use('/' + version + '/project', project);
     router.use('/' + version + '/map', map);
     router.use('/' + version + '/gitloader', gitloader);
+    router.use('/' + version + '/upload', imageUploader);
 
     return router;
 }
