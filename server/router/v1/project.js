@@ -49,6 +49,25 @@ module.exports = () => {
         });
     });
 
+    router.post('/gitconnect'), (req, res) =>{
+        if (!req.header('token')){
+            res.status(401).json({ success : false });
+        }
+        ProjectModel.findOne({
+            _id : req.body.projectId
+        },(err,result) =>{
+            if(err){
+                throw err;
+            }
+            result.connection = req.body.repo;
+            result.save({},(err)=>{
+                if(err){
+                    throw err;
+                }
+            })
+        })
+    }
+
     router.get('/', (req, res) => {
         if (!req.header('token')) {
             res.status(401).json({ success: 0 });
