@@ -8,9 +8,10 @@ import {ReactComponent as HallofBest} from '../../../svgs/icon-hallofbest.svg';
 import {NavLink, NavLinkProps} from "react-router-dom";
 
 const cx = classNames.bind(styles);
-const defaultNavProps: Pick<NavLinkProps, 'activeClassName' | 'className'> = {
+const defaultNavProps: Pick<NavLinkProps, 'activeClassName' | 'className' | 'exact'> = {
     activeClassName: cx('active'),
-    className: cx('sidebar-menuitem')
+    className: cx('sidebar-menuitem'),
+    exact: true,
 };
 
 const Sidebar: React.FC = () => (

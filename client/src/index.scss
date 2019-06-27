@@ -38,4 +38,9 @@ html,
 body {
   margin: 0;
   padding: 0;
+  color: $text;
+}
+
+h1.section-title {
+  font-size: 3.375rem;
 }

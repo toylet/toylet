@@ -1,21 +1,21 @@
 import * as React from 'react';
-import styles from './ProjectList.module.scss';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { AppState } from '../store';
+import styles from './MyProjects.module.scss';
+import { RouteComponentProps } from 'react-router-dom';
+import { AppState } from '../../store';
 import { connect } from 'react-redux';
 import {
     endRequestProjectList,
     requestProjectList,
     selectProject,
     setProjectList
-} from '../store/project/actions';
-import { Project } from '../store/project/types';
+} from '../../store/project/actions';
+import { Project } from '../../store/project/types';
 
 type Props = RouteComponentProps &
     ReturnType<typeof mapStateToProps> &
     typeof actions;
 
-class ProjectList extends React.Component<Props> {
+class MyProjects extends React.Component<Props> {
     componentDidMount(): void {
         this.props.requestProjectList();
 
@@ -57,7 +57,7 @@ class ProjectList extends React.Component<Props> {
             <div className={styles.container}>
                 <div className={styles.projects}>
                     <div>
-                        ProjectList
+                        <h1 className="section-title">My Projects</h1>
                         <ul>
                             {this.props.loading ? (
                                 <span>loading</span>
@@ -102,4 +102,4 @@ const actions = {
 export default connect(
     mapStateToProps,
     actions
-)(ProjectList);
+)(MyProjects);
