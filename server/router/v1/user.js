@@ -6,6 +6,25 @@ const multer = require('multer');
 const UPLOAD_DIR = './server/uploads/profile';
 
 module.exports = () => {
+    router.use((res, req, next) => {
+        next();
+    });
+
+    router.get('/signin', (req, res) => {
+        UserModel.findOne({
+            email: req.body.email,
+            password: req.body.password
+        }, (err, doc) => {
+            if (err) throw err;
+
+            if (!doc) {
+                res.json({ 'succecss': 1 });
+            } else {
+                res.json({ 'succecss': 0 });
+            }
+        })
+    });
+
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
             cb(null, UPLOAD_DIR);
@@ -16,14 +35,15 @@ module.exports = () => {
     });
     const profileImageUpload = multer({ storage });
 
-    router.post('/', profileImageUpload.single('profileImage'), (req, res) => {
+    router.post('/signup', profileImageUpload.single('profileImage'), (req, res) => {
+        console.log(req.file.path);
         UserModel.find({
             email: req.body.email
         }, (err, docs) => {
             if (err) throw err;
 
             if (docs.length == 0) {
-                /* User 정보 없으면 생성 */
+                // User 정보 없으면 생성
                 const newUser = new UserModel({
                     'email': req.body.email,
                     'password': req.body.password,
@@ -42,6 +62,8 @@ module.exports = () => {
                     res.json({ 'succecss': 1 });
                 });
             } else {
+                //duplicate user data
+                console.log('duplicate data');
                 res.json({ 'success': 0 });
             }
         });

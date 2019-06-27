@@ -1,4 +1,4 @@
-const mongoose = requre('mongoose');
+const mongoose = require('mongoose');
 
 const ProjectSchema = new mongoose.Schema({
     owners: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
