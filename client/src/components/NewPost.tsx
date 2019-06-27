@@ -88,7 +88,21 @@ export const light: Theme = {
     imageErrorBackground: colors.greyLight
 };
 
-export default class NewPost extends React.Component<{}, { v: string }> {
+interface IProps {}
+
+export default class NewPost extends React.Component<
+    IProps,
+    { v: string; isConnected: boolean }
+> {
+    constructor(props: IProps) {
+        super(props);
+
+        this.state = {
+            v: '',
+            isConnected: false
+        };
+    }
+
     // TODO:: debounce
     onChange: OnChange = value => {
         this.setState({ v: value() });
@@ -117,20 +131,31 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                         <div className={styles.editor}>
                             <Editor
                                 onChange={this.onChange}
+                                uploadImage={mockUploadFunc}
                                 defaultValue={markdownTemplate}
                                 theme={light}
                             />
                         </div>
-                        <CommitHistory />
+                        {this.state.isConnected ? <CommitHistory /> : null}
                     </div>
                     <div className={styles.sidebar}>
                         {/* TODO:: Connected repository information */}
-                        <div className={styles.connectGitHub}>
-                            <GitHubIcon />
-                            <span className={styles.connectGitHubText}>
-                                Connect Github Repo
-                            </span>
-                        </div>
+                        {!this.state.isConnected ? (
+                            /* TODO:: Replace with real connecting interface*/
+                            <div
+                                className={styles.connectGitHub}
+                                onClick={() => {
+                                    this.setState({
+                                        isConnected: true
+                                    });
+                                }}
+                            >
+                                <GitHubIcon />
+                                <span className={styles.connectGitHubText}>
+                                    Connect Github Repo
+                                </span>
+                            </div>
+                        ) : null}
                         <Tips />
                     </div>
                 </div>
@@ -138,6 +163,14 @@ export default class NewPost extends React.Component<{}, { v: string }> {
         );
     }
 }
+
+const mockUploadFunc = async (file: File) => {
+    return new Promise<string>(resolve => {
+        setTimeout(() => {
+            resolve(URL.createObjectURL(file));
+        }, 4000);
+    });
+};
 
 const Tips = () => (
     <div className={styles.tips}>
