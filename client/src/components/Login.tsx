@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 
 export default class Login extends Component<ITokenProps> {
     onLoginSuccess = () => {
@@ -10,14 +9,8 @@ export default class Login extends Component<ITokenProps> {
     render() {
         return (
             <div>
-                {this.props.token ? (
-                    <Redirect to={'/'} />
-                ) : (
-                    <div>
-                        Login Plz{' '}
-                        <button onClick={this.onLoginSuccess}>Login</button>
-                    </div>
-                )}
+                Login Plz
+                <button onClick={this.onLoginSuccess}>Login</button>
             </div>
         );
     }
