@@ -10,7 +10,8 @@ module.exports = () => {
         next();
     });
 
-    router.get('/signin', (req, res) => {
+    // signin
+    router.get('/', (req, res) => {
         UserModel.findOne({
             email: req.body.email,
             password: req.body.password
@@ -35,7 +36,8 @@ module.exports = () => {
     });
     const profileImageUpload = multer({ storage });
 
-    router.post('/signup', profileImageUpload.single('profileImage'), (req, res) => {
+    // signup
+    router.post('/', profileImageUpload.single('profileImage'), (req, res) => {
         console.log(req.file.path);
         UserModel.find({
             email: req.body.email
