@@ -1,0 +1,33 @@
+.fileUploader {
+	width: auto !important;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+.fileContainer {
+	background: none;
+	box-shadow: none;
+	position: relative;
+	border-radius: 10px;
+	padding: 0;
+	align-items: flex-start;
+}
+
+.chooseFileButton {
+	margin-top: 0 !important;
+	margin-left: 84px !important;
+	width: 152px;
+	height: 152px;
+	border: none;
+	border-radius: 50% !important;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
+	background-color: #a7a7a7 !important;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+}
+
+.uploadIcon {
+	display: none;
+}

@@ -6,8 +6,9 @@
 	position: fixed;
 	right: 84px;
 	bottom: 54px;
-	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 8px 16px 0 #63aeff;
 	background-color: #63aeff;
+	cursor: pointer;
 
 	svg {
 		width: 29px;
@@ -17,5 +18,6 @@
 	.disable {
 		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 		background-color: #cdd1d4;
+		cursor: none;
 	}
 }

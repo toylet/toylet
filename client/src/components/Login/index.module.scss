@@ -9,7 +9,7 @@ $accent: #ffca0c;
 }
 
 .Form-wrapper {
-	margin-left: 84px;
+	margin: auto 84px;
 }
 
 .Form-wrapper input {
@@ -26,10 +26,11 @@ $accent: #ffca0c;
 
 .Dont-have-an-account {
 	font-family: 'Source Sans Pro';
-	font-size: 24px;
+	font-size: 18px;
 	text-decoration: underline;
 	color: $text;
 	margin-top: 36px;
+	width: 606px;
 	position: absolute;
 }
 
