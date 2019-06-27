@@ -7,16 +7,17 @@ import {
     RouteProps,
     Redirect
 } from 'react-router-dom';
-import Main from './components/Main';
 import Login from './components/Login';
 import Discover from './components/Discover';
 import ProjectDetail from './components/ProjectDetail';
+import ProjectList from './components/ProjectList';
+import NewPost from './components/NewPost';
 
 class App extends Component<{}, {}> {
     render() {
         const token = localStorage.getItem('token');
         return (
-            <div className={styles.App}>
+            <div style={{ height: '100vh'}}>
                 <Router>
                     <Switch>
                         <AuthRoute
@@ -30,11 +31,21 @@ class App extends Component<{}, {}> {
                             token={token}
                         />
                         <PrivateRoute
+                            path="/projects/:id/new-post"
+                            component={NewPost}
+                            token={token}
+                        />
+                        <PrivateRoute
                             path="/projects/:id"
                             component={ProjectDetail}
                             token={token}
                         />
-                        <PrivateRoute exact path="/" component={Main} token={token} />
+                        <PrivateRoute
+                            exact
+                            path="/"
+                            component={ProjectList}
+                            token={token}
+                        />
                         <Redirect to="/" />
                     </Switch>
                 </Router>
