@@ -1,6 +1,10 @@
 import * as React from 'react';
 import Editor, { OnChange, Theme } from 'rich-markdown-editor';
 
+import { ReactComponent as DownloadIcon } from '../svgs/download.svg';
+import { ReactComponent as GitHubIcon } from '../svgs/github.svg';
+import { ReactComponent as TipIcon } from '../svgs/tip.svg';
+
 import styles from './NewPost.module.scss';
 
 const markdownTemplate = `
@@ -112,7 +116,29 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                             theme={light}
                         />
                     </div>
-                    <div className={styles.sidebar}>adsf</div>
+                    <div className={styles.sidebar}>
+                        <div className={styles.tips}>
+                            <div className={styles.tipIcon}>
+                                <TipIcon/>
+                            </div>
+                            <span className={styles.tipTitle}>
+                                Logging tips
+                            </span>
+                            <div className={styles.tipPoint}>1. Works Done</div>
+                            <span className={styles.tipDesc}>
+                                What were the tasks you've done today?
+                            </span>
+                            <div className={styles.tipPoint}>2. Issues</div>
+                            <span className={styles.tipDesc}>
+                                What were the problems or difficulties of doing
+                                today's project?
+                            </span>
+                            <div className={styles.tipPoint}>3. To-do</div>
+                            <span className={styles.tipDesc}>
+                                What should you do next?
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
