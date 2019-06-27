@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Editor, { OnChange, Theme } from 'rich-markdown-editor';
 
+import GitHubConnect from './GitHubConnect';
+
 import { ReactComponent as DownloadIcon } from '../svgs/download.svg';
 import { ReactComponent as GitHubIcon } from '../svgs/github.svg';
 import { ReactComponent as TipIcon } from '../svgs/tip.svg';
@@ -138,6 +140,7 @@ export default class NewPost extends React.Component<
                         </div>
                         {this.state.isConnected ? <CommitHistory /> : null}
                     </div>
+                    <GitHubConnect />
                     <div className={styles.sidebar}>
                         {/* TODO:: Connected repository information */}
                         {!this.state.isConnected ? (

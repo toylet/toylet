@@ -1,0 +1,29 @@
+@import '../index.scss';
+
+.select {
+    outline: none;
+
+    &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 #000;
+    }
+
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; /* remove default arrow */
+
+    padding: 24px 32px;
+    border-radius: 72px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
+    background-color: $pale-grey;
+
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+
+    font-weight: bold;
+
+    &.disabled {
+        color: $unimportant;
+    }
+}

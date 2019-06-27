@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './App.module.scss';
 import {
     BrowserRouter as Router,
     Route,
@@ -8,7 +7,6 @@ import {
     Redirect
 } from 'react-router-dom';
 import WebFont from 'webfontloader';
-import Main from './components/Main';
 import Login from './components/Login';
 import Discover from './components/Discover';
 import ProjectDetail from './components/ProjectDetail';
@@ -22,7 +20,7 @@ import configureStore from './store';
 
 WebFont.load({
     google: {
-        families: ['Source Sans Pro', 'Fredoka One']
+        families: ['Source Sans Pro:400,600,700', 'Fredoka One']
     }
 });
 
