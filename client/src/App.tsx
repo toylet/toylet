@@ -10,6 +10,7 @@ import {
 import Main from './components/Main';
 import Login from './components/Login';
 import Discover from './components/Discover';
+import ProjectDetail from './components/ProjectDetail';
 
 class App extends Component<{}, {}> {
     render() {
@@ -28,7 +29,13 @@ class App extends Component<{}, {}> {
                             component={Discover}
                             token={token}
                         />
-                        <PrivateRoute path="/" component={Main} token={token} />
+                        <PrivateRoute
+                            path="/projects/:id"
+                            component={ProjectDetail}
+                            token={token}
+                        />
+                        <PrivateRoute exact path="/" component={Main} token={token} />
+                        <Redirect to="/" />
                     </Switch>
                 </Router>
             </div>
