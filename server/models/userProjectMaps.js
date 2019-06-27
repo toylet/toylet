@@ -5,7 +5,7 @@ const UserProjectMapSchema = new mongoose.Schema({
     projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'project' },
     available: {
         type: {
-            workingHour: [{ type: Date },],
+            workingHour: [{ type: Date, 'default' : '00:00' },],
             contributableDate: [{ type: Number },]
         }
     },
