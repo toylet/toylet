@@ -11,8 +11,9 @@ import Main from './components/Main';
 import Login from './components/Login';
 import Discover from './components/Discover';
 import ProjectDetail from './components/ProjectDetail';
-import Signup from './components/Signup/'
-
+import Signup from './components/Signup/';
+import AdditionInfo from './components/AdditionInfo';
+import Optional from './components/Optional'
 
 WebFont.load({
     google: {
@@ -21,7 +22,7 @@ WebFont.load({
 });
 
 class App extends Component<{}, {}> {
-    render() {
+	render() {
         return (
             <div>
                 <Router>
@@ -34,6 +35,14 @@ class App extends Component<{}, {}> {
                             path="/signup"
                             component={Signup}
                         />
+						<AuthRoute
+							path='/additional'
+							component={AdditionInfo}
+						/>
+						<AuthRoute
+							path='/optional'
+							component={Optional}
+						/>
                         <PrivateRoute
                             path="/discover"
                             component={Discover}
@@ -66,6 +75,7 @@ class AuthRoute<P extends RouteProps = RouteProps> extends Component<
                 {...rest}
                 render={props => {
 					console.log(token);
+					console.log(token ? 'has token' : 'no token')
                     return token ? (
                         <Redirect to={'/login'} />
                     ) : (

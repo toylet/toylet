@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './form.module.scss'
 
-const InputForm: React.FC<{type: string, placeholder: string, onChange?: React.ChangeEventHandler}> = ({type, placeholder, ...rest}) => {
+const InputForm: React.FC<{type: string, placeholder: string, onChange?: React.ChangeEventHandler, name?: string}> = ({type, placeholder, ...rest}) => {
 
-const passwordRule = type === 'email' ? {} : {
+const passwordRule = type === 'password' ? {
 	maxLength: 32,
 	minLength: 8,
-}
+} : {}
 
 	return (
 		<input type={type}

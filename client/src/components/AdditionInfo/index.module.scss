@@ -4,11 +4,11 @@ $text: #0c1c2d;
 $accent: #ffca0c;
 
 .Form-wrapper {
-	margin-left: 84px;
+	margin-left: 42px;
 }
 
 .Form-wrapper>input {
-	width: 639px;
+	width: 473.7px;
 	margin-bottom: 32px;
 }
 
@@ -23,6 +23,16 @@ $accent: #ffca0c;
 	color: $text;
 	margin-left: 84px;
 }
+
+.profile-image {
+	width: 152px;
+	height: 152px;
+	border: none;
+	border-radius: 50%;
+	margin-left: 84px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
+	background-color: #a7a7a7;
+  }
 
 .text-style {
 	color: $accent;

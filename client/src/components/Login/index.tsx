@@ -46,7 +46,7 @@ export default class Login extends Component<LoginProps> {
 					<form onSubmit={this.handleSubmit} className={styles['Form-wrapper']}>
 						<InputForm type="email" onChange={this.handleChange}  placeholder="EMAIL"></InputForm>
 						<InputForm type="password" onChange={this.handleChange} placeholder="PASSWORD (8-32)"></InputForm>
-						<Link to="/reg" className={styles['Dont-have-an-account']}>
+						<Link to="/signup" className={styles['Dont-have-an-account']}>
 					Don’t have an <span className={styles['text-style']}>account</span>?
 					</Link>
 					<Btn />
