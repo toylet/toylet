@@ -81,8 +81,8 @@
     margin-left: 28px;
 }
 
-.editorContainer {
-    padding-top: 66px;
+.bodyContainer {
+    padding: 66px 0;
     margin: 0 auto;
 
     max-width: 1200px;
@@ -90,6 +90,15 @@
 
     display: flex;
     justify-content: center;
+}
+
+.editPanel {
+    flex: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
 }
 
 .editor {
@@ -116,6 +125,30 @@
     }
 }
 
+.history {
+    font-family: 'Fredoka One', cursive;
+    font-size: 32px;
+    color: $text;
+
+    margin-top: 48px;
+
+    padding: 36px 48px;
+
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.historyTitle {
+    margin-left: 18px;
+}
+
+.githubBlackIcon {
+    path {
+        fill: black;
+    }
+}
+
 .sidebar {
     flex: none;
     max-width: 272px;
@@ -125,6 +158,27 @@
     display: flex;
     flex-direction: column;
     align-content: stretch;
+}
+
+.connectGitHub {
+    padding: 24px;
+
+    margin-bottom: 30px;
+
+    display: flex;
+    align-items: center;
+
+    font-family: 'Fredoka One', cursive;
+    font-size: 16px;
+    color: white;
+
+    border-radius: 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 4px #333333;
+    background-color: #333333;
+}
+
+.connectGitHubText {
+    margin: 0 12px;
 }
 
 .tips {

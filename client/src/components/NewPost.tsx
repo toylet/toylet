@@ -112,15 +112,34 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                         </div>
                     </div>
                 </div>
-                <div className={styles.editorContainer}>
-                    <div className={styles.editor}>
-                        <Editor
-                            onChange={this.onChange}
-                            defaultValue={markdownTemplate}
-                            theme={light}
-                        />
+                <div className={styles.bodyContainer}>
+                    <div className={styles.editPanel}>
+                        <div className={styles.editor}>
+                            <Editor
+                                onChange={this.onChange}
+                                defaultValue={markdownTemplate}
+                                theme={light}
+                            />
+                        </div>
+                        <div className={styles.history}>
+                            <GitHubIcon
+                                className={styles.githubBlackIcon}
+                                style={{ fill: 'black' }}
+                            />
+                            <span className={styles.historyTitle}>
+                                Today’s Commit Histories
+                            </span>
+                        </div>
                     </div>
                     <div className={styles.sidebar}>
+                        {/* TODO:: Connected repository information */}
+                        <div className={styles.connectGitHub}>
+                            <GitHubIcon />
+                            <span className={styles.connectGitHubText}>
+                                Connect Github Repo
+                            </span>
+                        </div>
+
                         <div className={styles.tips}>
                             <div className={styles.tipIcon}>
                                 <TipIcon />
