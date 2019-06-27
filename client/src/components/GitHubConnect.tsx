@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import * as lodash from 'lodash';
 
 import { ReactComponent as Check } from '../svgs/icon-check.svg';
-
+import { GooSpinner } from 'react-spinners-kit';
 import Form from './form';
 
 import styles from './GitHubConnect.module.scss';
@@ -17,21 +17,26 @@ let reqId = 0;
 
 class GitHubConnect extends React.Component<
     {},
-    { valid: boolean; tokenText: string }
+    { valid: boolean; loading: boolean; tokenText: string }
 > {
     constructor(props: {}) {
         super(props);
 
         this.state = {
             valid: false,
+            loading: false,
             tokenText: ''
         };
     }
 
     onTextChange = (e: any) => {
-        this.setState({ tokenText: e.currentTarget.value, valid: false });
+        this.setState({
+            tokenText: e.currentTarget.value,
+            valid: false
+        });
         if (!e.currentTarget.value) return;
 
+        this.setState({ loading: true });
         reqId++;
         this.checkValidity();
     };
@@ -40,7 +45,7 @@ class GitHubConnect extends React.Component<
         const id = reqId;
         // TODO:: Replace with the actual API
         setTimeout(() => {
-            if (reqId === id) this.setState({ valid: true });
+            if (reqId === id) this.setState({ valid: true, loading: false });
         }, 1000);
     }, 250);
 
@@ -85,13 +90,19 @@ class GitHubConnect extends React.Component<
                     <div className={styles.desc}>
                         Select one repository that you want to integrate with
                     </div>
-                    <Select
-                        className={styles.input}
-                        disabled={!this.state.valid}
-                    >
-                        <option>ASDF</option>
-                        <option>asdf</option>
-                    </Select>
+                    {this.state.loading ? (
+                        <div className={styles.spinner}>
+                            <GooSpinner color="#63aeff" />
+                        </div>
+                    ) : (
+                        <Select
+                            className={styles.input}
+                            disabled={!this.state.valid}
+                        >
+                            <option>ASDF</option>
+                            <option>asdf</option>
+                        </Select>
+                    )}
                 </div>
             </ReactModal>
         );

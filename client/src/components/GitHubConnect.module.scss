@@ -40,6 +40,11 @@
     color: $text;
 }
 
+.spinner {
+    margin-top: 24px;
+    align-self: center;
+}
+
 .input {
     margin-top: 24px;
 }
@@ -66,4 +71,3 @@
     font-size: 1.15rem;
     color: rgba(12, 28, 45, 0.41);
 }
-
