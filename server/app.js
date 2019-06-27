@@ -17,7 +17,7 @@ function connectDB() {
 
     database.on('error', console.error.bind(console, 'mongoose connection error.'));
     database.on('open', () => {
-        
+
     });
     database.on('disconnected', () => {
         setInterval(connectDB, 5000);
@@ -25,6 +25,9 @@ function connectDB() {
 }
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 app.use('/api', rootRouter);
 app.use('/uploads', express.static(__dirname + '/uploads'));

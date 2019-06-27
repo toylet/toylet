@@ -10,12 +10,14 @@ module.exports = () => {
 
     router.post('/', (req, res) => {
         if (!req.header('token')) {
-            res.statusCode(401);
+            res.status(401);
         }
+        console.log(req.body);
+
         const newProject = new ProjectModel({
-            owners: [req.header('token'), ],
+            owners: [req.header('token'),],
             description: req.body.description,
-            type: req.body.type,
+            projtype: req.body.projtype,
             title: req.body.title,
             recruiting: req.body.recruiting,
             website: req.body.website
@@ -33,7 +35,7 @@ module.exports = () => {
 
     router.get('/', (req, res) => {
         if (!req.header('token')) {
-            res.statusCode(401);
+            res.status(401);
         }
         ProjectModel.find({
             owners: req.header('token')
@@ -44,41 +46,44 @@ module.exports = () => {
 
     router.put('/:id', (req, res) => {
         if (!req.header('token')) {
-            res.statusCode(401);
+            res.status(401);
         }
-        ProjectModel.update({
-            _id: id
+        console.log(req.params.id);
+        ProjectModel.findOneAndUpdate({
+            _id: req.params.id
         }, {
-            $set: {
-                owners: req.body.owners,
-                posts: req.body.posts,
-                lastUpdated: Date.now,
-                likes: req.body.likes,
-                description: req.body.description,
-                type: req.body.type,
-                title: req.body.title,
-                recruiting: req.body.recruiting,
-                website: req.body.website
-            }
-        }, (err) => {
-            if (err) {
-                throw err;
-            }
-        })
-    })
+                $set: {
+                    owners: req.body.owners,
+                    posts: req.body.posts,
+                    lastUpdated: Date.now(),
+                    likes: req.body.likes,
+                    description: req.body.description,
+                    type: req.body.type,
+                    title: req.body.title,
+                    recruiting: req.body.recruiting,
+                    website: req.body.website
+                }
+            }, (err, docs) => {
+                if (err) {
+                    throw err;
+                };
+                res.json(docs);
+            });
+    });
 
     router.delete('/:id', (req, res) => {
         if (!req.header('token')) {
-            res.statusCode(401);
+            res.status(401);
         }
-        ProjectModel.delete({
-            _id: id
-        }, (err) => {
+        ProjectModel.deleteOne({
+            _id: req.params.id
+        }, (err,docs) => {
             if (err) {
                 throw err;
-            }
-        })
-    })
+            };
+            res.json(req.params.id);
+        });
+    });
 
     return router;
 }

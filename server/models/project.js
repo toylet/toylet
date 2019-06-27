@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ProjectSchema = new mongoose.Schema({
-    owners: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+    owners: [{ type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true }],
     posts: { type: String },
     lastUpdated: { type: Date },
     likes: { type: Number },
@@ -11,6 +11,11 @@ const ProjectSchema = new mongoose.Schema({
     recruiting: { type: String },
     website: { type: String },
 });
+
+ProjectSchema.path('owners').validate((owners)=>{
+    return owners.length;
+}, 'have no owners');
+
 
 const ProjectModel = mongoose.model('projects', ProjectSchema);
 
