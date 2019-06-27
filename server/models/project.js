@@ -5,7 +5,7 @@ const ProjectSchema = new mongoose.Schema({
     posts: { type: String },
     lastUpdated: { type: Date },
     likes: { type: Number },
-    description: { type: String },
+    description: { type: String, required : false},
     type: { type: String },
     title: { type: String },
     recruiting: { type: String },

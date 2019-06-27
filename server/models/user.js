@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     company : {type:String, 'default':''},
     language : [{type:String, 'default':'English'}],
     link : {type:String},
-    profileImageLink : {type:String}
+    profileImageLink : {type:String, required : true}
 });
 
 UserSchema.path('email').validate((email)=>{
