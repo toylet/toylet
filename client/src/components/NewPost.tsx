@@ -94,8 +94,15 @@ export default class NewPost extends React.Component<{}, { v: string }> {
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <input placeholder="Title" />
-                    <span>Save</span>
+                    <div className={styles.headerTextContainer}>
+                        <input
+                            className={styles.headerTextInput}
+                            placeholder="Title"
+                        />
+                        <span className={styles.headerTextDate}>
+                            June 27, 2019 | Beomjun Gil @Affect Script
+                        </span>
+                    </div>
                 </div>
                 <div className={styles.editorContainer}>
                     <div className={styles.editor}>

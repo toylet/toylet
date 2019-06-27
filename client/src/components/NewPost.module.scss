@@ -7,13 +7,40 @@
     overflow-y: scroll;
 
     background-color: #f5f6f7;
+}
 
-    .header {
-        flex: none;
-        justify-self: stretch;
-        height: 268px;
-        background-color: white;
-    }
+.header {
+    flex: none;
+    justify-self: stretch;
+    height: 268px;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+}
+
+.headerTextContainer {
+    flex: 1;
+    max-width: 1236px;
+
+    padding-top: 110px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.headerTextInput {
+
+    border: 0;
+
+    font-family: 'Fredoka One', cursive;
+    font-size: 64px;
+}
+
+.headerTextDate {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .editorContainer {
@@ -21,7 +48,6 @@
     display: flex;
     justify-content: center;
 }
-
 
 .editor {
     flex: auto;
