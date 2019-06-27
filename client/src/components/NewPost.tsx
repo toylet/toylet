@@ -121,15 +121,7 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                                 theme={light}
                             />
                         </div>
-                        <div className={styles.history}>
-                            <GitHubIcon
-                                className={styles.githubBlackIcon}
-                                style={{ fill: 'black' }}
-                            />
-                            <span className={styles.historyTitle}>
-                                Today’s Commit Histories
-                            </span>
-                        </div>
+                        <CommitHistory />
                     </div>
                     <div className={styles.sidebar}>
                         {/* TODO:: Connected repository information */}
@@ -139,31 +131,43 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                                 Connect Github Repo
                             </span>
                         </div>
-
-                        <div className={styles.tips}>
-                            <div className={styles.tipIcon}>
-                                <TipIcon />
-                            </div>
-                            <span className={styles.tipTitle}>
-                                Logging tips
-                            </span>
-                            <div className={styles.tipPoint}>1. Works Done</div>
-                            <span className={styles.tipDesc}>
-                                What were the tasks you've done today?
-                            </span>
-                            <div className={styles.tipPoint}>2. Issues</div>
-                            <span className={styles.tipDesc}>
-                                What were the problems or difficulties of doing
-                                today's project?
-                            </span>
-                            <div className={styles.tipPoint}>3. To-do</div>
-                            <span className={styles.tipDesc}>
-                                What should you do next?
-                            </span>
-                        </div>
+                        <Tips />
                     </div>
                 </div>
             </div>
         );
     }
 }
+
+const Tips = () => (
+    <div className={styles.tips}>
+        <div className={styles.tipIcon}>
+            <TipIcon />
+        </div>
+        <span className={styles.tipTitle}>Logging tips</span>
+        <div className={styles.tipPoint}>1. Works Done</div>
+        <span className={styles.tipDesc}>
+            What were the tasks you've done today?
+        </span>
+        <div className={styles.tipPoint}>2. Issues</div>
+        <span className={styles.tipDesc}>
+            What were the problems or difficulties of doing today's project?
+        </span>
+        <div className={styles.tipPoint}>3. To-do</div>
+        <span className={styles.tipDesc}>What should you do next?</span>
+    </div>
+);
+
+const CommitHistory = () => {
+    return (
+        <div className={styles.history}>
+            <GitHubIcon
+                className={styles.githubBlackIcon}
+                style={{ fill: 'black' }}
+            />
+            <span className={styles.historyTitle}>
+                Today’s Commit Histories
+            </span>
+        </div>
+    );
+};
