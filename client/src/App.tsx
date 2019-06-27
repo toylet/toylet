@@ -11,6 +11,7 @@ import Login from './components/Login';
 import Discover from './components/Discover';
 import ProjectDetail from './components/ProjectDetail';
 import ProjectList from './components/ProjectList';
+import NewPost from './components/NewPost';
 
 class App extends Component<{}, {}> {
     render() {
@@ -27,6 +28,11 @@ class App extends Component<{}, {}> {
                         <PrivateRoute
                             path="/discover"
                             component={Discover}
+                            token={token}
+                        />
+                        <PrivateRoute
+                            path="/projects/:id/new-post"
+                            component={NewPost}
                             token={token}
                         />
                         <PrivateRoute
