@@ -1,0 +1,38 @@
+$primary: #63aeff;
+$title: #0c1c2d;
+$text: #0c1c2d;
+$accent: #ffca0c;
+
+
+.women {
+	margin: auto 136px;
+}
+
+.Form-wrapper {
+	margin-left: 84px;
+}
+
+.Form-wrapper input {
+	width: 606px
+}
+
+.Form-wrapper>input:first-child {
+	margin-bottom: 32px;
+}
+
+.Form-wrapper>input:last-child {
+	margin-bottom: 36px;
+}
+
+.Dont-have-an-account {
+	font-family: 'Source Sans Pro';
+	font-size: 24px;
+	text-decoration: underline;
+	color: $text;
+	margin-top: 36px;
+	position: absolute;
+}
+
+.text-style {
+	color: $accent;
+}

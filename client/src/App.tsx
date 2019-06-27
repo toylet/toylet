@@ -7,53 +7,71 @@ import {
     RouteProps,
     Redirect
 } from 'react-router-dom';
+import WebFont from 'webfontloader';
+import Main from './components/Main';
 import Login from './components/Login';
 import Discover from './components/Discover';
 import ProjectDetail from './components/ProjectDetail';
+import Signup from './components/Signup/';
+import AdditionInfo from './components/AdditionInfo';
+import Optional from './components/Optional'
 import ProjectList from './components/ProjectList';
 import NewPost from './components/NewPost';
 import { Provider } from 'react-redux';
 import configureStore from './store';
 
+WebFont.load({
+    google: {
+        families: ['Source Sans Pro', 'Fredoka One']
+    }
+});
+
 const store = configureStore();
 
+
 class App extends Component<{}, {}> {
-    render() {
-        const token = localStorage.getItem('token');
+	render() {
         return (
-            <div style={{ height: '100vh' }}>
+            <div>
                 <Provider store={store}>
-                    <Router>
-                        <Switch>
-                            <AuthRoute
-                                path="/login"
-                                component={Login}
-                                token={token}
-                            />
-                            <PrivateRoute
-                                path="/discover"
-                                component={Discover}
-                                token={token}
-                            />
-                            <PrivateRoute
-                                path="/projects/:id/new-post"
-                                component={NewPost}
-                                token={token}
-                            />
-                            <PrivateRoute
-                                path="/projects/:id"
-                                component={ProjectDetail}
-                                token={token}
-                            />
-                            <PrivateRoute
-                                exact
-                                path="/"
-                                component={ProjectList}
-                                token={token}
-                            />
-                            <Redirect to="/" />
-                        </Switch>
-                    </Router>
+                <Router>
+                    <Switch>
+                        <AuthRoute
+                            path="/login"
+                            component={Login}
+                        />
+                        <PrivateRoute
+                            path="/projects/:id/new-post"
+                            component={NewPost}
+                        />
+                        <PrivateRoute
+                            exact
+                            path="/"
+                            component={ProjectList}
+                        />
+						<AuthRoute
+                            path="/signup"
+                            component={Signup}
+                        />
+						<AuthRoute
+							path='/additional'
+							component={AdditionInfo}
+						/>
+						<AuthRoute
+							path='/optional'
+							component={Optional}
+						/>
+                        <PrivateRoute
+                            path="/discover"
+                            component={Discover}
+                        />
+                        <PrivateRoute
+                            path="/projects/:id"
+                            component={ProjectDetail}
+                        />
+                        <Redirect to="/" />
+                    </Switch>
+                </Router>
                 </Provider>
             </div>
         );
@@ -61,10 +79,12 @@ class App extends Component<{}, {}> {
 }
 
 class AuthRoute<P extends RouteProps = RouteProps> extends Component<
-    P & ITokenProps
+    P
 > {
     render() {
-        const { token, component: Comp, ...rest } = this.props;
+		const { component: Comp, ...rest } = this.props;
+
+        const token = localStorage.getItem('token');
         return (
             <Route
                 {...rest}
@@ -82,10 +102,12 @@ class AuthRoute<P extends RouteProps = RouteProps> extends Component<
 }
 
 class PrivateRoute<P extends RouteProps = RouteProps> extends Component<
-    P & ITokenProps
+    P
 > {
     render() {
-        const { token, component: Comp, ...rest } = this.props;
+		const { component: Comp, ...rest } = this.props;
+
+        const token = localStorage.getItem('token');
         return (
             <Route
                 {...rest}

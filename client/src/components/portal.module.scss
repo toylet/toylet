@@ -1,0 +1,35 @@
+$primary: #63aeff;
+$title: #0c1c2d;
+$text: #0c1c2d;
+$accent: #ffca0c;
+
+.App {
+	display: flex;
+	height: 100vh;
+}
+
+.App div {
+	flex: 1;
+}
+
+.App-left {
+	background-color: $primary;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.logo {
+	margin-left: 84px;
+	margin-top: 54px;
+}
+
+.Lets-do-Toy-project {
+	margin-top: 164px;
+	margin-left: 84px;
+	max-width: 638px;
+	font-family: 'Fredoka One';
+	font-size: 64px;
+	font-weight: normal;
+	color: $title;
+}
