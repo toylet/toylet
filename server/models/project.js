@@ -10,6 +10,7 @@ const ProjectSchema = new mongoose.Schema({
     title: { type: String },
     recruiting: { type: String },
     repo: { type: String, "default": "" },
+    connection: {type:String}
 });
 
 ProjectSchema.path('owners').validate((owners)=>{
