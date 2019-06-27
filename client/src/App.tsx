@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import styles from './App.module.scss';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Main from './components/Main';
-import Login from './components/Login';
+import Login from './components/Login/';
+import Signup from './components/Signup/'
 
 class App extends Component<{}, {}> {
     render() {
         const token = localStorage.getItem('token');
         return (
-            <div className={styles.App}>
+            <div>
                 <Router>
                     <Switch>
                         <Route
@@ -16,8 +16,10 @@ class App extends Component<{}, {}> {
                             path="/login"
                             render={() => <Login token={token} />}
                         />
+						<Route path="/signup" exact component={Signup} />
                         <Route path="/" render={() => <Main token={token} />} />
                     </Switch>
+					
                 </Router>
             </div>
         );

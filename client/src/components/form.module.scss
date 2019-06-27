@@ -1,0 +1,27 @@
+$text: #0c1c2d;
+$pale-grey: #f6faff;
+
+.Form {
+	height: 25px;
+	// width: 606px;
+	padding: 24px 0 24px 32px;
+	border: none;
+	display: block;
+	border-radius: 72px;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.16);
+	background-color: $pale-grey;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: 'Source Sans Pro';
+	color: $text;
+	// margin-bottom: 48px;
+
+	.invailed {
+		box-shadow: 0 8px 16px 0 rgba(255, 60, 60, 0.35);
+		background-color: #ffe8e8;
+	}
+}
+
+.Form::placeholder {
+	letter-spacing: 4.5px;
+}

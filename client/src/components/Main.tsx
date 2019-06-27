@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { Redirect } from 'react-router';
+import WebFont from 'webfontloader'
+
+WebFont.load({
+	google: {
+		families: ['Source Sans Pro', 'Fredoka One']
+	}
+})
 
 export default class Main extends Component<ITokenProps> {
     constructor(props: ITokenProps) {
