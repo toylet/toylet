@@ -1,0 +1,15 @@
+@import '../index.scss';
+
+.button {
+    border-radius: 42px;
+    box-shadow: 0 8px 16px 0 rgba(99, 174, 255, 0.5);
+    background-color: $primary;
+
+    padding: 1rem 3rem;
+}
+
+.content {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.5rem;
+    color: white;
+}

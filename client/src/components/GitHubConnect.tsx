@@ -8,6 +8,7 @@ import Form from './form';
 
 import styles from './GitHubConnect.module.scss';
 import Select from './Select';
+import Button from './Button';
 
 const customStyle = {
     content: { top: 0, left: 0, width: '50%' }
@@ -40,6 +41,8 @@ class GitHubConnect extends React.Component<
         reqId++;
         this.checkValidity();
     };
+
+    onConnect = () => {};
 
     checkValidity = lodash.debounce(() => {
         const id = reqId;
@@ -103,6 +106,9 @@ class GitHubConnect extends React.Component<
                             <option>asdf</option>
                         </Select>
                     )}
+                    <div className={styles.footer}>
+                        <Button className={styles.button} onClick={this.onConnect}>CONNECT</Button>
+                    </div>
                 </div>
             </ReactModal>
         );
