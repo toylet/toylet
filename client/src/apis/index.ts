@@ -1,7 +1,7 @@
 import wretch, { WretcherOptions } from 'wretch';
 
 let token = '';
-const URL = 'http://a667e88b.ngrok.io';
+const URL = 'http://localhost:8000';
 
 export function setToken(t: string) {
     token = t;
@@ -26,4 +26,10 @@ export async function userrepo(gitToken: string) {
             console.log('userrepo error', error);
             return undefined;
         });
+}
+
+export async function projectList() {
+    return start(URL + '/api/v1/project')
+        .get()
+        .json(json => json.project);
 }

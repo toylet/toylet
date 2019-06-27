@@ -24,15 +24,11 @@ interface Props {
     onRequestClose: () => void;
 }
 
-interface Repo {
-    title: string;
-}
-
 interface State {
     valid: boolean;
     loading: boolean;
     tokenText: string;
-    repos: Repo[];
+    repos: string[];
 }
 
 class GitHubConnect extends React.Component<Props, State> {
@@ -68,6 +64,9 @@ class GitHubConnect extends React.Component<Props, State> {
         apis.userrepo(gitToken).then(repos => {
             if (reqId === id) {
                 this.setState({ valid: Boolean(repos), loading: false });
+                if (repos) {
+                    this.setState({ repos });
+                }
             }
         });
     }, 250);
@@ -125,7 +124,7 @@ class GitHubConnect extends React.Component<Props, State> {
                             disabled={!this.state.valid}
                         >
                             {this.state.repos.map(repo => {
-                                return <option>{repo.title}</option>;
+                                return <option>{repo}</option>;
                             })}
                         </Select>
                     )}

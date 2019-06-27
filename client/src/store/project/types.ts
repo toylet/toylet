@@ -8,8 +8,10 @@ export interface ProjectState {
 }
 
 export interface Project {
-    id: string;
+    _id: string;
     title: string;
+    posts: string[];
+    lastUpdated: string;
 }
 
 interface SetProjectListAction {

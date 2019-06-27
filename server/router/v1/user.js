@@ -60,7 +60,7 @@ module.exports = () => {
                     if (err) {
                         throw err;
                     }
-                    res.json({ 'success': true });
+                    res.json({ 'success': true, user: newUser });
                 });
             } else {
                 //duplicate user data
