@@ -9,8 +9,8 @@ import Btn from '../btn'
 import { ReactComponent as Logo } from '../../svgs/logo.svg'
 
 
-export default class Sigup extends Component<ITokenProps, { pictures: File[] }> {
-	constructor(props: ITokenProps) {
+export default class Sigup extends Component<{}, { pictures: File[] }> {
+	constructor(props: {}) {
         super(props);
         this.state = { pictures: [] };
         this.onDrop = this.onDrop.bind(this);

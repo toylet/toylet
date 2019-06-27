@@ -3,6 +3,8 @@ import { Component } from 'react';
 import { Redirect } from 'react-router';
 import WebFont from 'webfontloader'
 
+import styles from './Main.module.scss';
+
 WebFont.load({
 	google: {
 		families: ['Source Sans Pro', 'Fredoka One']
@@ -10,10 +12,6 @@ WebFont.load({
 })
 
 export default class Main extends Component<ITokenProps> {
-    constructor(props: ITokenProps) {
-        super(props);
-    }
-
 
     onClickLogout = () => {
         localStorage.removeItem('token');
@@ -22,15 +20,13 @@ export default class Main extends Component<ITokenProps> {
 
     render() {
         return (
-            <div>
-                {!this.props.token ? (
-                    <Redirect to={'/login'} />
-                ) : (
-                    <div>
-                        Wow login1!
-                        <button onClick={this.onClickLogout}>logout</button>
-                    </div>
-                )}
+            <div className={styles.container}>
+                <div className={styles.sidebar}>
+                    <button onClick={this.onClickLogout}>logout</button>
+                    <div>My Projects</div>
+                    <button>Discover</button>
+                </div>
+                <div className={styles.projects}>wef</div>
             </div>
         );
     }
