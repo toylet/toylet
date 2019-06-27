@@ -1,6 +1,4 @@
-const onLoginSuccess = () => {
+export function onLoginSuccess (history: any) {
 	localStorage.setItem('token', 'something');
-	window.location.href = '/';
+	history.push('/');
 };
-
-export {onLoginSuccess}

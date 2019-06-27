@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styles from './App.module.scss';
 import {
     BrowserRouter as Router,
     Route,
@@ -23,7 +22,6 @@ WebFont.load({
 
 class App extends Component<{}, {}> {
     render() {
-        const token = localStorage.getItem('token');
         return (
             <div>
                 <Router>
@@ -31,27 +29,25 @@ class App extends Component<{}, {}> {
                         <AuthRoute
                             path="/login"
                             component={Login}
-                            token={token}
                         />
 						<AuthRoute
                             path="/signup"
                             component={Signup}
-                            token={token}
                         />
                         <PrivateRoute
                             path="/discover"
                             component={Discover}
-                            token={token}
                         />
                         <PrivateRoute
                             path="/projects/:id"
                             component={ProjectDetail}
-                            token={token}
                         />
-                        <PrivateRoute exact path="/" component={Main} token={token} />
+                        <PrivateRoute
+							exact path="/"
+							component={Main}
+						/>
                         <Redirect to="/" />
                     </Switch>
-					
                 </Router>
             </div>
         );
@@ -59,14 +55,17 @@ class App extends Component<{}, {}> {
 }
 
 class AuthRoute<P extends RouteProps = RouteProps> extends Component<
-    P & ITokenProps
+    P
 > {
     render() {
-        const { token, component: Comp, ...rest } = this.props;
+		const { component: Comp, ...rest } = this.props;
+		
+        const token = localStorage.getItem('token');
         return (
             <Route
                 {...rest}
                 render={props => {
+					console.log(token);
                     return token ? (
                         <Redirect to={'/login'} />
                     ) : (
@@ -80,14 +79,17 @@ class AuthRoute<P extends RouteProps = RouteProps> extends Component<
 }
 
 class PrivateRoute<P extends RouteProps = RouteProps> extends Component<
-    P & ITokenProps
+    P
 > {
     render() {
-        const { token, component: Comp, ...rest } = this.props;
+		const { component: Comp, ...rest } = this.props;
+		
+        const token = localStorage.getItem('token');
         return (
             <Route
                 {...rest}
                 render={props => {
+					console.log(token);
                     return !token ? (
                         <Redirect to={'/login'} />
                     ) : (

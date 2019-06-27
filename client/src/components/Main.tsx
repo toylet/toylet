@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 import WebFont from 'webfontloader'
 
 import styles from './Main.module.scss';
