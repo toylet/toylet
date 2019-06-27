@@ -9,8 +9,8 @@ const UserSchema = new mongoose.Schema({
     language: [{ type: String, 'default': 'English' }],
     link: { type: String },
     profileImageLink: { type: String, required: true },
-    gitId: { type: String },
-    gittoken : {type:String}
+    gitId: { type: String, 'default':"" },
+    gittoken: { type: String, 'default': "" }
 });
 
 UserSchema.path('email').validate((email) => {
