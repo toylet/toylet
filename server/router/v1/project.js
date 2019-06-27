@@ -49,11 +49,11 @@ module.exports = () => {
         });
     });
 
-    router.post('/gitConnect'), (req, res) =>{
+    router.post('/gitconnect'), (req, res) =>{
         if (!req.header('token')){
-            res.status(401).json({ success : 0 });
+            res.status(401).json({ success : false });
         }
-        ProjectModel.find({
+        ProjectModel.findOne({
             _id : req.body.projectId
         },(err,result) =>{
             if(err){
