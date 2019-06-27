@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const config = require('./config/config.json');
-const rootRouter = require('./router/index.js');
+const rootRouter = require('./router/index')();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
