@@ -94,20 +94,31 @@ interface IProps {}
 
 export default class NewPost extends React.Component<
     IProps,
-    { v: string; isConnected: boolean }
+    { v: string; isConnected: boolean; isModalOpen: boolean }
 > {
     constructor(props: IProps) {
         super(props);
 
         this.state = {
             v: '',
-            isConnected: false
+            isConnected: false,
+            isModalOpen: false
         };
     }
 
     // TODO:: debounce
     onChange: OnChange = value => {
         this.setState({ v: value() });
+    };
+
+    onModalClose = () => {
+        this.setState({ isModalOpen: false });
+    };
+
+    onClickGitHubConnect = () => {
+        this.setState({
+            isModalOpen: true
+        });
     };
 
     render() {
@@ -140,18 +151,17 @@ export default class NewPost extends React.Component<
                         </div>
                         {this.state.isConnected ? <CommitHistory /> : null}
                     </div>
-                    <GitHubConnect />
+                    <GitHubConnect
+                        isOpen={this.state.isModalOpen}
+                        onRequestClose={this.onModalClose}
+                    />
                     <div className={styles.sidebar}>
                         {/* TODO:: Connected repository information */}
                         {!this.state.isConnected ? (
                             /* TODO:: Replace with real connecting interface*/
                             <div
                                 className={styles.connectGitHub}
-                                onClick={() => {
-                                    this.setState({
-                                        isConnected: true
-                                    });
-                                }}
+                                onClick={this.onClickGitHubConnect}
                             >
                                 <GitHubIcon />
                                 <span className={styles.connectGitHubText}>

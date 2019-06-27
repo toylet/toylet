@@ -16,11 +16,16 @@ const customStyle = {
 
 let reqId = 0;
 
+interface Props {
+    isOpen: boolean;
+    onRequestClose: () => void;
+}
+
 class GitHubConnect extends React.Component<
-    {},
+    Props,
     { valid: boolean; loading: boolean; tokenText: string }
 > {
-    constructor(props: {}) {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
@@ -56,9 +61,11 @@ class GitHubConnect extends React.Component<
         return (
             // @ts-ignore
             <ReactModal
-                isOpen={true}
+                isOpen={this.props.isOpen}
                 className={styles.content}
                 overlayClassName={styles.overlay}
+                shouldCloseOnOverlayClick
+                onRequestClose={this.props.onRequestClose}
             >
                 <div className={styles.container}>
                     <div className={styles.header}>Connect GitHub</div>
@@ -107,7 +114,12 @@ class GitHubConnect extends React.Component<
                         </Select>
                     )}
                     <div className={styles.footer}>
-                        <Button className={styles.button} onClick={this.onConnect}>CONNECT</Button>
+                        <Button
+                            className={styles.button}
+                            onClick={this.onConnect}
+                        >
+                            CONNECT
+                        </Button>
                     </div>
                 </div>
             </ReactModal>
