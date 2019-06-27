@@ -5,9 +5,8 @@ const UserSchema = new mongoose.Schema({
     password: { type: String, required: true },
     name: { type: String, required: true },
     job: { type: String, 'default': '' },
-    company: { type: String, 'default': '' },
     language: [{ type: String, 'default': 'English' }],
-    link: { type: String },
+    link: [{ type: String },],
     profileImageLink: { type: String, required: true },
     gitId: { type: String, 'default':"" },
     gittoken: { type: String, 'default': "" }

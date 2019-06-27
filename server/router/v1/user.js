@@ -51,7 +51,6 @@ module.exports = () => {
                     'password': req.body.password,
                     'name': req.body.name,
                     'job': req.body.job,
-                    'company': req.body.company,
                     'language': req.body.language,
                     'link': req.body.link,
                     'profileImageLink': req.file.path
