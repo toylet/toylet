@@ -19,11 +19,6 @@ WebFont.load({
 })
 
 export default class Login extends Component<ITokenProps> {
-    onLoginSuccess = () => {
-        localStorage.setItem('token', 'something');
-        window.location.href = '/';
-    };
-
     render() {
         return (
             <div>
@@ -36,8 +31,7 @@ export default class Login extends Component<ITokenProps> {
 						</div>
 						<div>
 							<Logo className={CommonStyles.logo}/>
-							<h1 className={CommonStyles['Lets-do-Toy-project']}>Let’s do Toy project
-Steadily.</h1>
+							<h1 className={CommonStyles['Lets-do-Toy-project']}>Let’s do Toy project Steadily.</h1>
 						<div className={styles['Form-wrapper']}>
 							<InputForm type="email" placeholder="EMAIL"></InputForm>
 							<InputForm type="password" placeholder="PASSWORD (8-32)"></InputForm>
@@ -47,8 +41,6 @@ Steadily.</h1>
 						</Link>
 						<Btn />
 						</div>
-						{/* <button onClick={this.onLoginSuccess}>Login</button> */}
-						
                     </div>
                 )}
             </div>
