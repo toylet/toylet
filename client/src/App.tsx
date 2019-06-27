@@ -7,10 +7,10 @@ import {
     RouteProps,
     Redirect
 } from 'react-router-dom';
-import Main from './components/Main';
 import Login from './components/Login';
 import Discover from './components/Discover';
 import ProjectDetail from './components/ProjectDetail';
+import ProjectList from './components/ProjectList';
 
 class App extends Component<{}, {}> {
     render() {
@@ -34,7 +34,12 @@ class App extends Component<{}, {}> {
                             component={ProjectDetail}
                             token={token}
                         />
-                        <PrivateRoute exact path="/" component={Main} token={token} />
+                        <PrivateRoute
+                            exact
+                            path="/"
+                            component={ProjectList}
+                            token={token}
+                        />
                         <Redirect to="/" />
                     </Switch>
                 </Router>
