@@ -67,10 +67,17 @@ module.exports = () => {
         })
     })
 
-    router.delete('/:id', (req,res)=>{
-        if (!req.header('token')){
+    router.delete('/:id', (req, res) => {
+        if (!req.header('token')) {
             res.statusCode(401);
         }
+        ProjectModel.delete({
+            _id: id
+        }, (err) => {
+            if (err) {
+                throw err;
+            }
+        })
     })
 
     return router;
