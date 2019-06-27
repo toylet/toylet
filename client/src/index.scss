@@ -13,3 +13,27 @@ $darken-primary: #3686dd;
 $accent: #ffca0c;
 
 $pale-grey: #f6faff;
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+html.wf-sourcesanspro-n4-active body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+html.wf-fredokaone-n4-active body {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Fredoka One', sans-serif;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}

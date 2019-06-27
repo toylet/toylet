@@ -1,0 +1,71 @@
+@import '../../../index';
+
+.sidebar-flex-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-logo {
+  height: 2rem;
+  width: 5rem;
+}
+
+.sidebar-wrapper {
+  @extend .sidebar-flex-wrapper;
+  max-width: 27.25rem;
+  width: 30%;
+  padding: 3rem 2.25rem 2.5rem;
+  background: white;
+  box-sizing: border-box;
+  flex: none;
+  height: 100%;
+}
+
+.sidebar-menu-item-wrapper {
+  margin-top: 5rem;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-profile {
+  border-radius: 50%;
+  background: #333333;
+  height: 2.625rem;
+  width: 2.625rem;
+}
+
+.sidebar-menuitem {
+  color: $text;
+  text-decoration: none;
+  margin: 0 0 1.5rem -2.25rem;
+  padding: 1rem 2.25rem;
+  border-radius: 0 5rem 5rem 0;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+
+
+  svg {
+    margin-right: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    path {
+      fill: rgba($text, 0.8);
+    }
+  }
+
+  &.active {
+    color: $primary;
+    background-color: rgba($primary, 0.1);
+
+    svg path {
+      fill: $primary;
+    }
+  }
+}
