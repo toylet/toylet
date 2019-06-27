@@ -1,5 +1,5 @@
 import produce from 'immer';
-import {ActionTypes, ProjectState} from './types';
+import { ActionTypes, ProjectState } from './types';
 
 const initialState: ProjectState = {
     byId: {},
@@ -36,6 +36,10 @@ export function projectReducer(state = initialState, action: ActionTypes) {
             }
             case 'END_REQUEST_PROJECT_LIST': {
                 draftState.loading = false;
+                return;
+            }
+            case 'SELECT_PROJECT': {
+                draftState.selectedProject = action.payload.project;
                 return;
             }
         }

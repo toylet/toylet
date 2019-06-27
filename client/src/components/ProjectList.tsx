@@ -1,19 +1,25 @@
 import * as React from 'react';
 import styles from './ProjectList.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
 import {
     endRequestProjectList,
     requestProjectList,
+    selectProject,
     setProjectList
 } from '../store/project/actions';
+import { Project } from '../store/project/types';
 
-type Props = ReturnType<typeof mapStateToProps> & typeof actions;
+type Props = RouteComponentProps &
+    ReturnType<typeof mapStateToProps> &
+    typeof actions;
 
 class ProjectList extends React.Component<Props> {
     componentDidMount(): void {
         this.props.requestProjectList();
+
+        // TODO:: Replace the mock fetch with the actual API fetch
         setTimeout(() => {
             this.props.setProjectList(
                 [
@@ -41,6 +47,11 @@ class ProjectList extends React.Component<Props> {
         this.logout();
     };
 
+    onSelectProject = (project: Project) => {
+        this.props.selectProject(project);
+        this.props.history.push('/projects/' + project.id);
+    };
+
     render() {
         return (
             <div className={styles.container}>
@@ -58,9 +69,13 @@ class ProjectList extends React.Component<Props> {
                             ) : (
                                 this.props.list.map(project => (
                                     <li>
-                                        <Link to={'/projects/' + project.id}>
+                                        <a
+                                            onClick={() =>
+                                                this.onSelectProject(project)
+                                            }
+                                        >
                                             {project.title}
-                                        </Link>
+                                        </a>
                                     </li>
                                 ))
                             )}
@@ -82,7 +97,12 @@ function mapStateToProps(state: AppState) {
     };
 }
 
-const actions = { setProjectList, requestProjectList, endRequestProjectList };
+const actions = {
+    setProjectList,
+    requestProjectList,
+    endRequestProjectList,
+    selectProject
+};
 
 export default connect(
     mapStateToProps,

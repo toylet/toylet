@@ -2,6 +2,7 @@ import {
     END_REQUEST_PROJECT_LIST,
     Project,
     REQUEST_PROJECT_LIST,
+    SELECT_PROJECT,
     SET_PROJECT_LIST
 } from './types';
 
@@ -24,5 +25,14 @@ export function requestProjectList() {
 export function endRequestProjectList() {
     return {
         type: END_REQUEST_PROJECT_LIST
+    };
+}
+
+export function selectProject(proj: Project) {
+    return {
+        type: SELECT_PROJECT,
+        payload: {
+            project: proj
+        }
     };
 }

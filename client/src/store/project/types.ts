@@ -3,6 +3,8 @@ export interface ProjectState {
     page: number;
     ids: string[];
     loading: boolean;
+
+    selectedProject?: Project;
 }
 
 export interface Project {
@@ -25,17 +27,28 @@ interface SetProjectListActionPayload {
 export const REQUEST_PROJECT_LIST = 'REQUEST_PROJECT_LIST';
 
 interface RequestProjectListAction {
-    type: typeof REQUEST_PROJECT_LIST,
-    payload: {}
+    type: typeof REQUEST_PROJECT_LIST;
+    payload: {};
 }
-
 
 export const END_REQUEST_PROJECT_LIST = 'END_REQUEST_PROJECT_LIST';
 
-
 interface EndRequestProjectListAction {
     type: typeof END_REQUEST_PROJECT_LIST;
-    payload: {}
+    payload: {};
 }
 
-export type ActionTypes = SetProjectListAction | RequestProjectListAction | EndRequestProjectListAction;
+export const SELECT_PROJECT = 'SELECT_PROJECT';
+
+interface selectProjectAction {
+    type: typeof SELECT_PROJECT;
+    payload: {
+        project: Project;
+    };
+}
+
+export type ActionTypes =
+    | SetProjectListAction
+    | RequestProjectListAction
+    | EndRequestProjectListAction
+    | selectProjectAction;
