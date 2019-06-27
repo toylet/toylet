@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
     Route,
     Switch,
     RouteProps,
-    Redirect, RouteComponentProps
+    Redirect,
+    RouteComponentProps
 } from 'react-router-dom';
 import WebFont from 'webfontloader';
 import Login from './components/Login';
@@ -12,12 +13,14 @@ import Discover from './components/Discover';
 import ProjectDetail from './components/ProjectDetail';
 import Signup from './components/Signup/';
 import AdditionInfo from './components/AdditionInfo';
-import Optional from './components/Optional'
+import Optional from './components/Optional';
 import MyProjects from './components/MyProjects';
 import NewPost from './components/NewPost';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import configureStore from './store';
-import SideLayout from "./components/common/SideLayout";
+import SideLayout from './components/common/SideLayout';
+
+import * as apis from './apis';
 
 WebFont.load({
     google: {
@@ -27,7 +30,6 @@ WebFont.load({
 
 const store = configureStore();
 
-
 class App extends Component<{}, {}> {
     render() {
         return (
@@ -35,10 +37,7 @@ class App extends Component<{}, {}> {
                 <Provider store={store}>
                     <Router>
                         <Switch>
-                            <AuthRoute
-                                path="/login"
-                                component={Login}
-                            />
+                            <AuthRoute path="/login" component={Login} />
                             <PrivateRoute
                                 path="/projects/:id/new-post"
                                 component={NewPost}
@@ -49,18 +48,12 @@ class App extends Component<{}, {}> {
                                 component={MyProjects}
                                 useSideLayout
                             />
+                            <AuthRoute path="/signup" component={Signup} />
                             <AuthRoute
-                                path="/signup"
-                                component={Signup}
-                            />
-                            <AuthRoute
-                                path='/additional'
+                                path="/additional"
                                 component={AdditionInfo}
                             />
-                            <AuthRoute
-                                path='/optional'
-                                component={Optional}
-                            />
+                            <AuthRoute path="/optional" component={Optional} />
                             <PrivateRoute
                                 path="/discover"
                                 component={Discover}
@@ -70,7 +63,7 @@ class App extends Component<{}, {}> {
                                 path="/projects/:id"
                                 component={ProjectDetail}
                             />
-                            <Redirect to="/"/>
+                            <Redirect to="/" />
                         </Switch>
                     </Router>
                 </Provider>
@@ -81,7 +74,7 @@ class App extends Component<{}, {}> {
 
 class AuthRoute<P extends RouteProps = RouteProps> extends Component<P> {
     render() {
-        const {component: Comp, ...rest} = this.props;
+        const { component: Comp, ...rest } = this.props;
 
         const token = localStorage.getItem('token');
         return (
@@ -89,7 +82,7 @@ class AuthRoute<P extends RouteProps = RouteProps> extends Component<P> {
                 {...rest}
                 render={props => {
                     return token ? (
-                        <Redirect to={'/login'}/>
+                        <Redirect to={'/login'} />
                     ) : (
                         // @ts-ignore
                         <Comp {...props} />
@@ -104,15 +97,18 @@ interface PrivateRouteProps extends RouteProps {
     useSideLayout?: boolean;
 }
 
-class PrivateRoute<P extends PrivateRouteProps = PrivateRouteProps> extends Component<P> {
+class PrivateRoute<
+    P extends PrivateRouteProps = PrivateRouteProps
+> extends Component<P> {
     render() {
-        const {component: Comp, useSideLayout, ...rest} = this.props;
+        const { component: Comp, useSideLayout, ...rest } = this.props;
 
         const token = localStorage.getItem('token');
+        if (token) apis.setToken(token);
 
         const renderComponent = (props: RouteComponentProps<any>) => {
             if (!token) {
-                return <Redirect to={'/login'}/>
+                return <Redirect to={'/login'} />;
             }
 
             if (useSideLayout) {
@@ -120,22 +116,17 @@ class PrivateRoute<P extends PrivateRouteProps = PrivateRouteProps> extends Comp
                     <SideLayout>
                         {
                             // @ts-ignore
-                            (<Comp {...props}/>)
+                            <Comp {...props} />
                         }
                     </SideLayout>
-                )
+                );
             }
 
             // @ts-ignore
-            return <Comp {...props}/>
+            return <Comp {...props} />;
         };
 
-        return (
-            <Route
-                {...rest}
-                render={renderComponent}
-            />
-        );
+        return <Route {...rest} render={renderComponent} />;
     }
 }
 
