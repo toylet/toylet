@@ -6,6 +6,7 @@ import styles from './index.module.scss';
 import InputForm from '../form';
 import Btn from '../btn';
 import { ReactComponent as Logo } from '../../svgs/logo.svg';
+import {ReactComponent as Register } from '../../svgs/register.svg'
 import { RouteComponentProps } from 'react-router';
 
 type TProps = RouteComponentProps & ITokenProps
@@ -47,7 +48,9 @@ export default class Sigup extends Component<
     render() {
         return (
             <div className={CommonStyles.App}>
-                <div className={CommonStyles['App-left']}></div>
+                <div className={CommonStyles['App-left']}>
+					<Register />
+				</div>
                 <div>
                     <Logo className={CommonStyles.logo} />
                     <h1 className={CommonStyles['Lets-do-Toy-project']}>
