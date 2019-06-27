@@ -5,8 +5,8 @@ const UserProjectMapSchema = new mongoose.Schema({
     projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'project' },
     available: {
         type: {
-            workingHour: [{ type: Date }],
-            contributableDate: [{ type: Number }]
+            workingHour: [{ type: Date },],
+            contributableDate: [{ type: Number },]
         }
     },
     message: { type: String, "default": "" },
