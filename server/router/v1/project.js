@@ -64,6 +64,7 @@ module.exports = () => {
                 if(err){
                     throw err;
                 }
+                res.status(200).json({success:true});
             })
         })
     }
