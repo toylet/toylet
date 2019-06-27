@@ -13,3 +13,36 @@ $darken-primary: #3686dd;
 $accent: #ffca0c;
 
 $pale-grey: #f6faff;
+
+$background: #F5F6F7;
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html.wf-sourcesanspro-n4-active body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+html.wf-fredokaone-n4-active body {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: 'Fredoka One', sans-serif;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: $text;
+}
+
+h1.section-title {
+  font-size: 3.375rem;
+}

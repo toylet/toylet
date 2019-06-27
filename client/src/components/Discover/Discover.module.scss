@@ -1,0 +1,15 @@
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 0 2rem;
+  margin: 0 auto 4rem;
+}
+
+.projects-title {
+  margin: 4.25rem 0 1.5rem;
+}
