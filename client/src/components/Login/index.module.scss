@@ -9,7 +9,7 @@ $accent: #ffca0c;
 }
 
 .Form-wrapper {
-	margin-left: 84px;
+	margin: auto 84px;
 }
 
 .Form-wrapper input {
@@ -30,6 +30,7 @@ $accent: #ffca0c;
 	text-decoration: underline;
 	color: $text;
 	margin-top: 36px;
+	width: 606px;
 	position: absolute;
 }
 
