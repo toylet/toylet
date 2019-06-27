@@ -3,6 +3,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    align-content: stretch;
 
     height: 100%;
 
@@ -23,7 +24,7 @@
 
 .headerTextContainer {
     flex: 1;
-    max-width: 1266px;
+    max-width: 1200px;
 
     padding-top: 110px;
 
@@ -51,14 +52,19 @@
 }
 
 .editorContainer {
-    padding-top: 66px;
+    padding: 66px;
+    margin: 0 auto;
+
+    max-width: 1200px;
+    width: 100%;
+
+
     display: flex;
     justify-content: center;
 }
 
 .editor {
     flex: auto;
-    max-width: 870px;
 
     padding: 48px;
 
