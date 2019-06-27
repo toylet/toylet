@@ -9,7 +9,7 @@ const ProjectSchema = new mongoose.Schema({
     type: { type: String },
     title: { type: String },
     recruiting: { type: String },
-    website: { type: String },
+    repo: { type: String, "default": "" },
 });
 
 ProjectSchema.path('owners').validate((owners)=>{
