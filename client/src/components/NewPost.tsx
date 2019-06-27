@@ -94,12 +94,15 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                     <input placeholder="Title" />
                     <span>Save</span>
                 </div>
-                <div className={styles.editor} style={{ margin: 50 }}>
-                    <Editor
-                        onChange={this.onChange}
-                        defaultValue={markdownTest}
-                        theme={light}
-                    />
+                <div className={styles.editorContainer}>
+                    <div className={styles.editor}>
+                        <Editor
+                            onChange={this.onChange}
+                            defaultValue={markdownTest}
+                            theme={light}
+                        />
+                    </div>
+                    <div className={styles.sidebar}>adsf</div>
                 </div>
             </div>
         );

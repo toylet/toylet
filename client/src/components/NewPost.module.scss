@@ -1,11 +1,30 @@
+.editorContainer {
+    display: flex;
+    justify-content: center;
+}
+
 .editor {
-  margin: 50px;
+    flex: auto;
+    max-width: 870px;
 
-  h1, h2, h3, h4, h5 {
-    font-family: 'Fredoka One', cursive;
-  }
+    font-size: 1.33333em;
 
-  strong {
-    font-weight: 700;
-  }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-family: 'Fredoka One', cursive;
+    }
+
+    strong {
+        font-weight: 700;
+    }
+}
+
+.sidebar {
+    flex: none;
+    max-width: 272px;
+    width: 270px;
+    background-color: grey;
 }
