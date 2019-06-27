@@ -11,26 +11,22 @@ module.exports = () => {
 
     router.post('/', (req, res) => {
         if (!req.header('token')) {
-            res.status(401).json({ success: 0 });
-        };
-        console.log(req.body);
+            res.status(401);
+        }
+
         const newProject = new ProjectModel({
             owners: [req.header('token'), ],
             description: req.body.description,
             projtype: req.body.projtype,
             title: req.body.title,
             recruiting: req.body.recruiting,
-            repo: req.body.repo
+            website: req.body.website
         });
 
         newProject.save((err) => {
             if (err) {
                 throw err;
             }
-            res.json({
-                'success': 1
-            });
-
             const newMaps = new MapsModel({
                 ownerId: req.header('token'),
                 projectId: newProject._id,
@@ -41,23 +37,39 @@ module.exports = () => {
                 message: req.body.message,
                 isOwner: true
             });
+
+            newMaps.save((err) => {
+                if (err) {
+                    throw err;
+                }
+                res.json({
+                    success: 1
+                });
+            });
         });
     });
 
     router.get('/', (req, res) => {
         if (!req.header('token')) {
-            res.status(401).json({ success: 0 });
+            res.status(401);
         }
         ProjectModel.find({
             owners: req.header('token')
         }, (err, docs) => {
-            res.json(docs);
+            MapsModel.find({
+                ownerId: req.header('token')
+            }, (err, docs2) => {
+                res.json({
+                    project: docs,
+                    map: docs2
+                })
+            })
         });
     });
 
     router.put('/:id', (req, res) => {
         if (!req.header('token')) {
-            res.status(401).json({ success: 0 });
+            res.status(401);
         }
         ProjectModel.findOneAndUpdate({
             _id: req.params.id
@@ -71,7 +83,7 @@ module.exports = () => {
                 type: req.body.type,
                 title: req.body.title,
                 recruiting: req.body.recruiting,
-                repo: req.body.repo
+                website: req.body.website
             }
         }, (err, docs) => {
             if (err) {

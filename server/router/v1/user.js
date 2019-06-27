@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const multer = require('multer');
-const UPLOAD_DIR = './server/uploads/profile';
+const UPLOAD_DIR = './uploads/profile';
 
 module.exports = () => {
     router.use((res, req, next) => {
