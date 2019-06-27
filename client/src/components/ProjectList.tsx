@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styles from './ProjectList.module.scss';
-import { NavLink, RouteComponentProps} from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { AppState } from '../store';
 import { connect } from 'react-redux';
 import {
@@ -10,7 +10,6 @@ import {
     setProjectList
 } from '../store/project/actions';
 import { Project } from '../store/project/types';
-import Sidebar from "./common/Sidebar";
 
 type Props = RouteComponentProps &
     ReturnType<typeof mapStateToProps> &
@@ -56,7 +55,6 @@ class ProjectList extends React.Component<Props> {
     render() {
         return (
             <div className={styles.container}>
-                <Sidebar/>
                 <div className={styles.projects}>
                     <div>
                         ProjectList
