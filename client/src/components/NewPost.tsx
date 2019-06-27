@@ -106,6 +106,10 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                         <span className={styles.headerTextDate}>
                             June 27, 2019 | Beomjun Gil @Affect Script
                         </span>
+                        <div className={styles.saveButton}>
+                            <DownloadIcon className={styles.saveIcon} />
+                            <span className={styles.saveText}>SAVE</span>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.editorContainer}>
@@ -119,7 +123,7 @@ export default class NewPost extends React.Component<{}, { v: string }> {
                     <div className={styles.sidebar}>
                         <div className={styles.tips}>
                             <div className={styles.tipIcon}>
-                                <TipIcon/>
+                                <TipIcon />
                             </div>
                             <span className={styles.tipTitle}>
                                 Logging tips

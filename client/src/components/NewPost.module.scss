@@ -28,6 +28,8 @@
 
     padding-top: 110px;
 
+    position: relative;
+
     display: flex;
     flex-direction: column;
 }
@@ -51,13 +53,40 @@
     color: rgba(12, 28, 45, 0.5);
 }
 
+.saveButton {
+    position: absolute;
+    right: 0px;
+    bottom: -30px;
+
+    width: 177px;
+
+    border-radius: 42px;
+    box-shadow: 0 8px 16px 0 rgba(99, 174, 255, 0.5);
+    background-color: $primary;
+
+    padding: 18px 0;
+}
+
+.saveIcon {
+    margin-left: 24px;
+}
+
+.saveText {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+
+    color: white;
+
+    margin-left: 28px;
+}
+
 .editorContainer {
-    padding: 66px;
+    padding-top: 66px;
     margin: 0 auto;
 
     max-width: 1200px;
     width: 100%;
-
 
     display: flex;
     justify-content: center;
