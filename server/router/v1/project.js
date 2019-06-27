@@ -83,7 +83,7 @@ module.exports = () => {
                 type: req.body.type,
                 title: req.body.title,
                 recruiting: req.body.recruiting,
-                website: req.body.website
+                repo: req.body.repo
             }
         }, (err, docs) => {
             if (err) {
