@@ -48,9 +48,8 @@ module.exports = () => {
                 // User 정보 없으면 생성
                 const newUser = new UserModel({
                     'email': req.body.email,
-                    'password': req.user.password,
+                    'password': req.body.password,
                     'name': req.body.name,
-                    'average_working_time': req.body.WT,
                     'job': req.body.job,
                     'company': req.body.company,
                     'language': req.body.language,

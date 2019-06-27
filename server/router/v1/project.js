@@ -11,16 +11,16 @@ module.exports = () => {
 
     router.post('/', (req, res) => {
         if (!req.header('token')) {
-            res.status(401);
-        }
-
+            res.status(401).json({ success: 0 });
+        };
+        console.log(req.body);
         const newProject = new ProjectModel({
             owners: [req.header('token'), ],
             description: req.body.description,
             projtype: req.body.projtype,
             title: req.body.title,
             recruiting: req.body.recruiting,
-            website: req.body.website
+            repo: req.body.repo
         });
 
         newProject.save((err) => {
@@ -46,7 +46,7 @@ module.exports = () => {
 
     router.get('/', (req, res) => {
         if (!req.header('token')) {
-            res.status(401);
+            res.status(401).json({ success: 0 });
         }
         ProjectModel.find({
             owners: req.header('token')
@@ -57,7 +57,7 @@ module.exports = () => {
 
     router.put('/:id', (req, res) => {
         if (!req.header('token')) {
-            res.status(401);
+            res.status(401).json({ success: 0 });
         }
         ProjectModel.findOneAndUpdate({
             _id: req.params.id
@@ -71,7 +71,7 @@ module.exports = () => {
                 type: req.body.type,
                 title: req.body.title,
                 recruiting: req.body.recruiting,
-                website: req.body.website
+                repo: req.body.repo
             }
         }, (err, docs) => {
             if (err) {
