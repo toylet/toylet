@@ -19,9 +19,9 @@ module.exports = () => {
             if (err) throw err;
 
             if (!doc) {
-                res.json({ 'succecss': 1 });
+                res.status(401).json({ 'success': false });
             } else {
-                res.json({ 'succecss': 0 });
+                res.json({ 'success': true, user: doc });
             }
         })
     });
@@ -60,12 +60,12 @@ module.exports = () => {
                     if (err) {
                         throw err;
                     }
-                    res.json({ 'succecss': 1 });
+                    res.json({ 'success': true });
                 });
             } else {
                 //duplicate user data
                 console.log('duplicate data');
-                res.json({ 'success': 0 });
+                res.status(400).json({ 'success': false });
             }
         });
     });
