@@ -1,5 +1,10 @@
 @import '../index.scss';
 
+.container {
+    position: relative;
+
+}
+
 .select {
     outline: none;
 
@@ -23,7 +28,15 @@
 
     font-weight: bold;
 
+    width: 100%;
+
     &.disabled {
         color: $unimportant;
     }
+}
+
+.arrow {
+    position: absolute;
+    right: 32px;
+    top: 51px;
 }

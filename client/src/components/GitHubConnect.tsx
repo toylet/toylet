@@ -85,7 +85,10 @@ class GitHubConnect extends React.Component<
                     <div className={styles.desc}>
                         Select one repository that you want to integrate with
                     </div>
-                    <Select disabled={!this.state.valid}>
+                    <Select
+                        className={styles.input}
+                        disabled={!this.state.valid}
+                    >
                         <option>ASDF</option>
                         <option>asdf</option>
                     </Select>
