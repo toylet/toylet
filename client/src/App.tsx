@@ -69,10 +69,6 @@ class App extends Component<{}, {}> {
                             path="/projects/:id"
                             component={ProjectDetail}
                         />
-                        <PrivateRoute
-							exact path="/"
-							component={Main}
-						/>
                         <Redirect to="/" />
                     </Switch>
                 </Router>
