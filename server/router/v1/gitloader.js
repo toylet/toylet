@@ -15,8 +15,8 @@ module.exports = () => {
         if (!req.header('token')) {
             res.status(401).json({ success: 0 });
         };
-        // const gitToken = req.body.gitToken;
-        const gitToken = '99a1440abb79ed07664949a75e4bb41e332cf2e9';
+        const gitToken = req.header('gittoken');
+        // const gitToken = '99a1440abb79ed07664949a75e4bb41e332cf2e9';
         const BASEURL = 'https://api.github.com/user'
 
         const result = await axios.get(BASEURL + '/repos', {
@@ -25,7 +25,8 @@ module.exports = () => {
             }
         }).catch((err) => {
             console.log(err);
-            res.status(400).json({ success: 0 });
+            console.log('error hh');
+            res.status(400).json({ success: 0 }); 
         });
 
         const user = await axios.get(BASEURL, {
@@ -71,13 +72,15 @@ module.exports = () => {
             res.status(401).json({ success: 0 });
         }
         const BASEURL = 'https://api.github.com'
+        // const gittoken = req.header('gittoken');
 
         //TODO(Taeyoung) : change these dummy data
         const repoName = 'toylet';
         // const repoName = req.body.reponame;
         const ownerName = 'toylet'
 
-        const user = await UserModel.findOne({ _id: req.header('token') });
+        const user = UserModel.findOne({ _id: req.header('token') });
+        console.log(user);
         const result = await axios.get(BASEURL + '/repos/' + ownerName + '/' + repoName + '/commits', {
             headers: {
                 'Authorization': 'token ' + user.gittoken
