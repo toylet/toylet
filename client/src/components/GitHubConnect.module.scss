@@ -1,0 +1,96 @@
+@import '../index.scss';
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 9998;
+    overflow-y: hidden;
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+
+    overflow-y: scroll;
+
+    background-color: white;
+}
+
+.container {
+    padding: 64px 64px;
+    padding-bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    font-size: 0.8em;
+
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.header {
+    font-family: 'Fredoka One', cursive;
+    font-size: 4em;
+    color: $text;
+}
+
+.footer {
+    //position: absolute;
+    //right: 64px;
+    //bottom: 16px;
+    //justify-self: flex-end;
+
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 36px;
+
+}
+
+.button {
+    position: absolute;
+    bottom: 24px;
+}
+
+.spinner {
+    margin-top: 24px;
+    align-self: center;
+}
+
+.input {
+    margin-top: 24px;
+}
+
+.stepContainer {
+    margin-top: 5em;
+
+    display: flex;
+    align-items: center;
+}
+
+.stepText {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.5em;
+    color: $text;
+
+    margin-right: 16px;
+}
+
+.desc {
+    margin-top: 12px;
+
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.15rem;
+    color: rgba(12, 28, 45, 0.41);
+}

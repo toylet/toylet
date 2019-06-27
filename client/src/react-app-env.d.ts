@@ -4,6 +4,10 @@ interface ITokenProps {
     token: String | null;
 }
 
+declare module 'react-modal' {
+    export default class ReactModal extends React.Component<any> {}
+}
+
 declare module 'rich-markdown-editor' {
     interface Props {
         defaultValue?: String;

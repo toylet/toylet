@@ -1,21 +1,31 @@
-import React from 'react'
-import styles from './form.module.scss'
+import React from 'react';
+import styles from './form.module.scss';
 
-const InputForm: React.FC<{type: string, placeholder: string, onChange?: React.ChangeEventHandler, name?: string}> = ({type, placeholder, ...rest}) => {
+import classnames from 'classnames';
 
-const passwordRule = type === 'password' ? {
-	maxLength: 32,
-	minLength: 8,
-} : {}
-
-	return (
-		<input type={type}
-		className={styles.Form}
-		placeholder={placeholder}
-		{...passwordRule}
-		{...rest}
-		/>
-	)
+interface Props extends React.HTMLAttributes<HTMLInputElement> {
+    type: string;
+    placeholder: string;
+    name?: string;
 }
 
-export default InputForm
+const InputForm: React.FC<Props> = ({ type, ...rest }) => {
+    const passwordRule =
+        type === 'password'
+            ? {
+                  maxLength: 32,
+                  minLength: 8
+              }
+            : {};
+
+    return (
+        <input
+            type={type}
+            {...passwordRule}
+            {...rest}
+            className={classnames(styles.Form, rest.className)}
+        />
+    );
+};
+
+export default InputForm;
