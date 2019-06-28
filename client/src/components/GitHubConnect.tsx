@@ -61,7 +61,7 @@ class GitHubConnect extends React.Component<Props, State> {
     checkValidity = lodash.debounce(gitToken => {
         const id = reqId;
 
-        apis.userrepo(gitToken).then(repos => {
+        apis.userrepo(gitToken).then((repos: string[] | undefined) => {
             if (reqId === id) {
                 this.setState({ valid: Boolean(repos), loading: false });
                 if (repos) {

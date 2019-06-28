@@ -1,4 +1,5 @@
 import wretch, { WretcherOptions } from 'wretch';
+import { Project } from '../store/project/types';
 
 let token = '';
 const URL = 'http://localhost:8000';
@@ -32,4 +33,16 @@ export async function projectList() {
     return start(URL + '/api/v1/project')
         .get()
         .json(json => json.project);
+}
+
+export async function getProductDetail(id: string) {
+    return start(URL + '/api/v1/project/' + id)
+        .get()
+        .json(json => json as Project);
+}
+
+export async function updateProject(projectId: string, projectData: Project) {
+    return start(`${URL}/api/v1/project/${projectId}`)
+        .put(projectData)
+        .json(json => json);
 }

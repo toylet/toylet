@@ -42,15 +42,30 @@ interface EndRequestProjectListAction {
 
 export const SELECT_PROJECT = 'SELECT_PROJECT';
 
-interface selectProjectAction {
+interface SelectProjectAction {
     type: typeof SELECT_PROJECT;
     payload: {
         project: Project;
     };
 }
 
+export const ADD_POST_TO_PROJECT = 'ADD_POST_TO_PROJECT';
+
+interface AddPostToProjectAction {
+    type: typeof ADD_POST_TO_PROJECT;
+    payload: {
+        post: Post;
+    }
+}
+
+export interface Post {
+    title: string;
+    body: string;
+}
+
 export type ActionTypes =
     | SetProjectListAction
     | RequestProjectListAction
     | EndRequestProjectListAction
-    | selectProjectAction;
+    | SelectProjectAction
+    | AddPostToProjectAction;

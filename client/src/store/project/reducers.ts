@@ -42,6 +42,11 @@ export function projectReducer(state = initialState, action: ActionTypes) {
                 draftState.selectedProject = action.payload.project;
                 return;
             }
+            case 'ADD_POST_TO_PROJECT': {
+                if (draftState.selectedProject)
+                    draftState.selectedProject.posts.push(JSON.stringify(action.payload.post));
+                return;
+            }
         }
     });
 }

@@ -15,6 +15,7 @@ declare module 'rich-markdown-editor' {
         onSave?: ({ done: boolean }) => void;
         onChange?: OnChange;
         uploadImage?: (file: File) => Promise<string>;
+        readOnly?: boolean;
     }
 
     export type OnChange = (value: () => string) => void;

@@ -88,6 +88,16 @@ module.exports = () => {
         });
     });
 
+
+    router.get('/:id', (req, res) => {
+        ProjectModel.findOne({
+            _id: req.params.id
+        }, (err, doc) => {
+            res.json(doc);
+        })
+    });
+
+
     router.put('/:id', (req, res) => {
         if (!req.header('token')) {
             res.status(401).json({ success: 0 });
