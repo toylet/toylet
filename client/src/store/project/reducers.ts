@@ -24,9 +24,9 @@ export function projectReducer(state = initialState, action: ActionTypes) {
             case 'SET_PROJECT_LIST': {
                 draftState.byId = assocBy(
                     action.payload.list,
-                    project => project.id
+                    project => project._id
                 );
-                draftState.ids = action.payload.list.map(item => item.id);
+                draftState.ids = action.payload.list.map(item => item._id);
                 draftState.page = action.payload.page;
                 return;
             }

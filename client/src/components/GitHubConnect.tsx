@@ -2,13 +2,16 @@ import * as React from 'react';
 import ReactModal from 'react-modal';
 import * as lodash from 'lodash';
 
-import { ReactComponent as Check } from '../svgs/icon-check.svg';
 import { GooSpinner } from 'react-spinners-kit';
+
+import { ReactComponent as Check } from '../svgs/icon-check.svg';
 import Form from './form';
 
 import styles from './GitHubConnect.module.scss';
-import Select from './Select';
-import Button from './Button';
+import Select from './common/Select';
+import Button from './common/Button';
+
+import * as apis from '../apis';
 
 const customStyle = {
     content: { top: 0, left: 0, width: '50%' }
@@ -21,40 +24,51 @@ interface Props {
     onRequestClose: () => void;
 }
 
-class GitHubConnect extends React.Component<
-    Props,
-    { valid: boolean; loading: boolean; tokenText: string }
-> {
+interface State {
+    valid: boolean;
+    loading: boolean;
+    tokenText: string;
+    repos: string[];
+}
+
+class GitHubConnect extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
         this.state = {
             valid: false,
             loading: false,
-            tokenText: ''
+            tokenText: '',
+            repos: []
         };
     }
 
     onTextChange = (e: any) => {
+        const tokenText = e.currentTarget.value;
         this.setState({
-            tokenText: e.currentTarget.value,
+            tokenText,
             valid: false
         });
-        if (!e.currentTarget.value) return;
+        if (!tokenText) return;
 
         this.setState({ loading: true });
         reqId++;
-        this.checkValidity();
+        this.checkValidity(tokenText);
     };
 
     onConnect = () => {};
 
-    checkValidity = lodash.debounce(() => {
+    checkValidity = lodash.debounce(gitToken => {
         const id = reqId;
-        // TODO:: Replace with the actual API
-        setTimeout(() => {
-            if (reqId === id) this.setState({ valid: true, loading: false });
-        }, 1000);
+
+        apis.userrepo(gitToken).then(repos => {
+            if (reqId === id) {
+                this.setState({ valid: Boolean(repos), loading: false });
+                if (repos) {
+                    this.setState({ repos });
+                }
+            }
+        });
     }, 250);
 
     render() {
@@ -109,8 +123,9 @@ class GitHubConnect extends React.Component<
                             className={styles.input}
                             disabled={!this.state.valid}
                         >
-                            <option>ASDF</option>
-                            <option>asdf</option>
+                            {this.state.repos.map(repo => {
+                                return <option>{repo}</option>;
+                            })}
                         </Select>
                     )}
                     <div className={styles.footer}>

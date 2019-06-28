@@ -36,7 +36,7 @@ function mapStateToProps(state: AppState, props: Props) {
     const proj = state.project.selectedProject;
 
     return {
-        project: proj && props.match.params.id === proj.id ? proj : undefined
+        project: proj && props.match.params.id === proj._id ? proj : undefined
     };
 }
 

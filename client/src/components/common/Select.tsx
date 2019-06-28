@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PropsWithChildren, SelectHTMLAttributes } from 'react';
 
-import { ReactComponent as DownArrow } from '../svgs/icon-downarrow.svg';
+import { ReactComponent as DownArrow } from '../../svgs/icon-downarrow.svg';
 
 import styles from './Select.module.scss';
 import classnames from 'classnames/bind';

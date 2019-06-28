@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const multer = require('multer');
-const UPLOAD_DIR = './uploads/profile';
+const UPLOAD_DIR = './server/uploads/profile';
 
 module.exports = () => {
     router.use((res, req, next) => {
@@ -19,9 +19,15 @@ module.exports = () => {
             if (err) throw err;
 
             if (!doc) {
-                res.json({ 'succecss': true });
+
+                res.status(401).json({
+                    'success': false
+                });
             } else {
-                res.json({ 'succecss': false });
+                res.json({
+                    'success': true,
+                    user: doc
+                });
             }
         })
     });
@@ -34,7 +40,9 @@ module.exports = () => {
             cb(null, file.originalname);
         }
     });
-    const profileImageUpload = multer({ storage });
+    const profileImageUpload = multer({
+        storage
+    });
 
     // signup
     router.post('/register', profileImageUpload.single('profileImage'), (req, res) => {
@@ -59,12 +67,17 @@ module.exports = () => {
                     if (err) {
                         throw err;
                     }
-                    res.json({ 'succecss': 1 });
+                    res.json({
+                        'success': true,
+                        user: newUser
+                    });
                 });
             } else {
                 //duplicate user data
                 console.log('duplicate data');
-                res.json({ 'success': 0 });
+                res.status(400).json({
+                    'success': false
+                });
             }
         });
     });
