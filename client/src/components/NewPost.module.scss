@@ -131,6 +131,28 @@
     }
 }
 
+.articleHeader {
+    margin-top: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.articleTextContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.articleTitle {
+
+    font-family: 'Fredoka One', cursive;
+
+    font-size: 3.5rem;
+
+    color: $text;
+}
+
 .history {
     font-family: 'Fredoka One', cursive;
     font-size: 32px;
