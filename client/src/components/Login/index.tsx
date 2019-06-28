@@ -9,13 +9,21 @@ import { Link } from 'react-router-dom';
 import InputForm from '../form';
 import Btn from '../btn';
 
+import {signin} from '../../api'
+
 import { ReactComponent as Women } from '../../svgs/login.svg';
 import { ReactComponent as Logo } from '../../svgs/logo.svg';
+import { string } from 'prop-types';
 
 interface LoginProps extends ITokenProps{}
 interface LoginProps extends RouteComponentProps{}
 
-export default class Login extends Component<LoginProps> {
+interface LoginState {
+	email: string,
+	password: string
+}
+
+export default class Login extends Component<LoginProps, LoginState> {
 	constructor(props: LoginProps) {
 		super(props);
 		console.log(props)
@@ -26,12 +34,17 @@ export default class Login extends Component<LoginProps> {
 	}
 
 	handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		// @ts-ignore
 		this.setState({[e.target.type]: e.target.value})
 	};
 
 	handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		onLoginSuccess(this.props.history)
+		signin(this.state.email, this.state.password)
+			.then(data => {
+				console.log(data)
+			})
+		// onLoginSuccess(this.props.history)
 	}
     render() {
         return (

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { signup } from '../../api'
 
 import CommonStyles from '../portal.module.scss';
 import styles from './index.module.scss';
 
-import { onLoginSuccess } from '../../auth';
+import { onLoginSuccess as onAuthSuccess } from '../../auth';
 
 import InputForm from '../form';
 import Btn from '../btn';
 import { ReactComponent as Logo } from '../../svgs/logo.svg';
+import { RouteComponentProps } from 'react-router';
 
 type TState = {
     github: string;
@@ -19,8 +21,8 @@ interface TProps extends ITokenProps {
 	history: History,
 }
 
-export default class Optional extends Component<TProps , TState> {
-    constructor(props: TProps) {
+export default class Optional extends Component<TProps & RouteComponentProps, TState> {
+    constructor(props: TProps & RouteComponentProps) {
         super(props);
         this.state = {
             github: '',
@@ -37,9 +39,16 @@ export default class Optional extends Component<TProps , TState> {
     handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 		// API Call
-		// this.state.filter(i => i.lenght)
 		// {...this.props.location.state, this.state}
-        onLoginSuccess(this.props.history);
+		const {pictures, ...data} = this.props.location.state
+		const profileImage = pictures[0]
+
+		const link = [this.state.github, this.state.behance, this.state.dribble]
+		console.log({profileImage, ...data, link})
+		signup({profileImage, ...data, link}).then((e) => {
+			console.log(e)
+			onAuthSuccess(this.props.history);
+		})
     };
 
     render() {
