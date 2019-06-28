@@ -19,6 +19,9 @@ import { Provider } from 'react-redux';
 import configureStore from './store';
 import SideLayout from './components/common/SideLayout';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import * as apis from './apis';
 import ProjectDetailWithPosts from './components/ProjectDetailWithPosts';
 
@@ -36,6 +39,7 @@ class App extends Component<{}, {}> {
             <div>
                 <Provider store={store}>
                     <Router>
+                        <ToastContainer />
                         <Switch>
                             <AuthRoute path="/login" component={Login} />
                             <PrivateRoute

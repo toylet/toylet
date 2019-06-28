@@ -15,7 +15,7 @@ import { addPostToProject } from '../store/project/actions';
 import { RouteComponentProps } from 'react-router';
 
 import * as apis from '../apis';
-
+import { ToastContainer, toast } from 'react-toastify';
 const markdownTemplate = `
 # Summary
 ## Task 1
@@ -136,6 +136,8 @@ class NewPost extends React.Component<
         });
     };
 
+    notifySaved = () => toast.success("The article has been saved!");
+
     // shit code
     onClickSave = () => {
         if (!this.props.project) return;
@@ -152,6 +154,7 @@ class NewPost extends React.Component<
             apis.updateProject(id, this.props.project);
             console.log('proj after', this.props.project);
 
+            this.notifySaved();
             this.props.history.push('/projects/' + id);
         }, 0);
     };
@@ -168,7 +171,7 @@ class NewPost extends React.Component<
                         <input
                             onChange={this.onTitleChange}
                             className={styles.headerTextInput}
-                            placeholder="Title"
+                            placeholder="Write your own title here"
                         />
                         <span className={styles.headerTextDate}>
                             June 27, 2019 | Beomjun Gil @Affect Script

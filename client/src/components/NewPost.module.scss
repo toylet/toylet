@@ -137,6 +137,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    margin-bottom:5rem;
 }
 
 .articleTextContainer {
@@ -145,12 +147,17 @@
 }
 
 .articleTitle {
-
     font-family: 'Fredoka One', cursive;
 
     font-size: 3.5rem;
 
     color: $text;
+}
+
+.articleDate {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    color: rgba(12, 28, 45, 0.5);
 }
 
 .history {
