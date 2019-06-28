@@ -88,6 +88,17 @@ module.exports = () => {
         });
     });
 
+    router.get('/discover', (req,res) =>{
+        if (!req.header('token')){
+            res.status(401).json({ success : false});
+        }
+        ProjectModel.find({}, (err, docs) =>{
+            if(err){
+                throw err;
+            }
+            res.json(docs);
+        });
+    });
 
     router.get('/:id', (req, res) => {
         ProjectModel.findOne({
