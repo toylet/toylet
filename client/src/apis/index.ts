@@ -46,3 +46,9 @@ export async function updateProject(projectId: string, projectData: Project) {
         .put(projectData)
         .json(json => json);
 }
+
+export async function createProject(data: any) {
+    return start(`${URL}/api/v1/project`)
+        .post(data)
+        .json(json => json);
+}
