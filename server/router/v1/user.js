@@ -11,7 +11,7 @@ module.exports = () => {
     });
 
     // signin
-    router.get('/', (req, res) => {
+    router.post('/login', (req, res) => {
         UserModel.findOne({
             email: req.body.email,
             password: req.body.password
@@ -19,9 +19,9 @@ module.exports = () => {
             if (err) throw err;
 
             if (!doc) {
-                res.json({ 'succecss': 1 });
+                res.json({ 'succecss': true });
             } else {
-                res.json({ 'succecss': 0 });
+                res.json({ 'succecss': false });
             }
         })
     });
@@ -37,7 +37,7 @@ module.exports = () => {
     const profileImageUpload = multer({ storage });
 
     // signup
-    router.post('/', profileImageUpload.single('profileImage'), (req, res) => {
+    router.post('/register', profileImageUpload.single('profileImage'), (req, res) => {
         console.log(req.file.path);
         UserModel.find({
             email: req.body.email
