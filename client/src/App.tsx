@@ -10,7 +10,6 @@ import {
 import WebFont from 'webfontloader';
 import Login from './components/Login';
 import Discover from './components/Discover';
-import ProjectDetail from './components/ProjectDetail';
 import Signup from './components/Signup/';
 import AdditionInfo from './components/AdditionInfo';
 import Optional from './components/Optional';
@@ -21,6 +20,7 @@ import configureStore from './store';
 import SideLayout from './components/common/SideLayout';
 
 import * as apis from './apis';
+import ProjectDetailWithPosts from './components/ProjectDetailWithPosts';
 
 WebFont.load({
     google: {
@@ -61,7 +61,7 @@ class App extends Component<{}, {}> {
                             />
                             <PrivateRoute
                                 path="/projects/:id"
-                                component={ProjectDetail}
+                                component={ProjectDetailWithPosts}
                             />
                             <Redirect to="/" />
                         </Switch>

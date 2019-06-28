@@ -1,8 +1,9 @@
 import * as React from 'react';
 import Editor, { OnChange, Theme } from 'rich-markdown-editor';
 
-import GitHubConnect from './GitHubConnect';
 import ConnectGitHubButton from './common/ConnectGitHubButton';
+
+import GitHubConnect from './GitHubConnect';
 
 import { ReactComponent as DownloadIcon } from '../svgs/download.svg';
 import { ReactComponent as GitHubIcon } from '../svgs/github.svg';
@@ -11,22 +12,10 @@ import { ReactComponent as TipIcon } from '../svgs/tip.svg';
 import styles from './NewPost.module.scss';
 import { connect } from 'react-redux';
 import { AppState } from '../store';
-import { addPostToProject } from '../store/project/actions';
+import { addPostToProject, selectProject } from '../store/project/actions';
 import { RouteComponentProps } from 'react-router';
 
 import * as apis from '../apis';
-
-const markdownTemplate = `
-# Summary
-## Task 1
-
-Write your task's description
-
-# Next Day TODOs
-- A
-- B
-- C
-`;
 
 const colors = {
     almostBlack: '#181A1B',
@@ -97,34 +86,34 @@ export const light: Theme = {
     imageErrorBackground: colors.greyLight
 };
 
-type Props = RouteComponentProps<{ id: string }> &
+type Props = RouteComponentProps<{ id: string }>;
+type ExtendedProps = Props &
     ReturnType<typeof mapStateToProps> &
     typeof mapDispatch;
 
-class NewPost extends React.Component<
-    Props,
+class ProjectDetailWithPosts extends React.Component<
+    ExtendedProps,
     { title: string; body: string; isConnected: boolean; isModalOpen: boolean }
 > {
-    constructor(props: Props) {
+    constructor(props: ExtendedProps) {
         super(props);
 
         this.state = {
             title: '',
-            body: markdownTemplate,
+            body: '',
             isConnected: false,
             isModalOpen: false
         };
     }
 
     componentDidMount(): void {
-        if (!this.props.project)
-            this.props.history.push('/projects/' + this.props.match.params.id);
+        if (!this.props.project) {
+            // TODO:: fetch project detail from the endpoint
+            apis.getProductDetail(this.props.match.params.id).then(project => {
+                this.props.selectProject(project);
+            });
+        }
     }
-
-    // TODO:: debounce
-    onChange: OnChange = value => {
-        this.setState({ body: value() });
-    };
 
     onModalClose = () => {
         this.setState({ isModalOpen: false });
@@ -136,63 +125,55 @@ class NewPost extends React.Component<
         });
     };
 
-    // shit code
     onClickSave = () => {
-        if (!this.props.project) return;
-
-        const { _id: id } = this.props.project;
-
-        const payload = { title: this.state.title, body: this.state.body };
-        console.log('proj before', this.props.project);
-        this.props.addPostToProject(payload);
-        // TODO:: Use thunk :O
-        setTimeout(() => {
-            if (!this.props.project) return;
-
-            apis.updateProject(id, this.props.project);
-            console.log('proj after', this.props.project);
-
-            this.props.history.push('/projects/' + id);
-        }, 0);
-    };
-
-    onTitleChange = (e: any) => {
-        this.setState({ title: e.currentTarget.value });
+        this.props.history.push(
+            `/projects/${this.props.match.params.id}/new-post`
+        );
     };
 
     render() {
+        const project = this.props.project;
+
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className={styles.headerTextContainer}>
-                        <input
-                            onChange={this.onTitleChange}
-                            className={styles.headerTextInput}
-                            placeholder="Title"
-                        />
+                        <span className={styles.headerTextInput}>
+                            {project ? project.title : 'Project Name'}
+                        </span>
                         <span className={styles.headerTextDate}>
-                            June 27, 2019 | Beomjun Gil @Affect Script
+                            All (Design + Develop) | Hannah Baker, Steven Lovett
+                            and Michael Santana
                         </span>
                         <div
                             onClick={this.onClickSave}
                             className={styles.saveButton}
                         >
                             <DownloadIcon className={styles.saveIcon} />
-                            <span className={styles.saveText}>SAVE</span>
+                            <span className={styles.saveText}>WRITE</span>
                         </div>
                     </div>
                 </div>
                 <div className={styles.bodyContainer}>
                     <div className={styles.editPanel}>
-                        <div className={styles.editor}>
-                            <Editor
-                                onChange={this.onChange}
-                                uploadImage={mockUploadFunc}
-                                defaultValue={markdownTemplate}
-                                theme={light}
-                            />
-                        </div>
-                        {this.state.isConnected ? <CommitHistory /> : null}
+                        {this.props.posts
+                            ? this.props.posts.map(post => {
+                                  return (
+                                      <div className={styles.post}>
+                                          <div className={styles.editor}>
+                                              <Editor
+                                                  defaultValue={post.body}
+                                                  readOnly
+                                                  theme={light}
+                                              />
+                                          </div>
+                                          {this.state.isConnected ? (
+                                              <CommitHistory />
+                                          ) : null}
+                                      </div>
+                                  );
+                              })
+                            : null}
                     </div>
                     <GitHubConnect
                         isOpen={this.state.isModalOpen}
@@ -213,14 +194,6 @@ class NewPost extends React.Component<
         );
     }
 }
-
-const mockUploadFunc = async (file: File) => {
-    return new Promise<string>(resolve => {
-        setTimeout(() => {
-            resolve(URL.createObjectURL(file));
-        }, 4000);
-    });
-};
 
 const Tips = () => (
     <div className={styles.tips}>
@@ -255,15 +228,19 @@ const CommitHistory = () => {
     );
 };
 
-function mapStateToProps(state: AppState) {
-    return { project: state.project.selectedProject };
+function mapStateToProps(state: AppState, props: Props) {
+    const proj = state.project.selectedProject;
+    const project =
+        proj && props.match.params.id === proj._id ? proj : undefined;
+    return {
+        project,
+        posts: project && project.posts.map(post => JSON.parse(post)).reverse()
+    };
 }
 
-const mapDispatch = {
-    addPostToProject
-};
+const mapDispatch = { selectProject };
 
 export default connect(
     mapStateToProps,
     mapDispatch
-)(NewPost);
+)(ProjectDetailWithPosts);
