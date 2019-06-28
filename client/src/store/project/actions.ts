@@ -1,5 +1,6 @@
 import {
-    END_REQUEST_PROJECT_LIST,
+    ADD_POST_TO_PROJECT,
+    END_REQUEST_PROJECT_LIST, Post,
     Project,
     REQUEST_PROJECT_LIST,
     SELECT_PROJECT,
@@ -33,6 +34,15 @@ export function selectProject(proj: Project) {
         type: SELECT_PROJECT,
         payload: {
             project: proj
+        }
+    };
+}
+
+export function addPostToProject(post: Post) {
+    return {
+        type: ADD_POST_TO_PROJECT,
+        payload: {
+            post
         }
     };
 }

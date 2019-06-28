@@ -8,6 +8,12 @@ import { ReactComponent as GitHubIcon } from '../svgs/github.svg';
 import { ReactComponent as TipIcon } from '../svgs/tip.svg';
 
 import styles from './NewPost.module.scss';
+import { connect } from 'react-redux';
+import { AppState } from '../store';
+import { addPostToProject } from '../store/project/actions';
+import { RouteComponentProps } from 'react-router';
+
+import * as apis from '../apis';
 
 const markdownTemplate = `
 # Summary
@@ -90,25 +96,33 @@ export const light: Theme = {
     imageErrorBackground: colors.greyLight
 };
 
-interface IProps {}
+type Props = RouteComponentProps<{ id: string }> &
+    ReturnType<typeof mapStateToProps> &
+    typeof mapDispatch;
 
-export default class NewPost extends React.Component<
-    IProps,
-    { v: string; isConnected: boolean; isModalOpen: boolean }
+class NewPost extends React.Component<
+    Props,
+    { title: string; body: string; isConnected: boolean; isModalOpen: boolean }
 > {
-    constructor(props: IProps) {
+    constructor(props: Props) {
         super(props);
 
         this.state = {
-            v: '',
+            title: '',
+            body: markdownTemplate,
             isConnected: false,
             isModalOpen: false
         };
     }
 
+    componentDidMount(): void {
+        if (!this.props.project)
+            this.props.history.push('/projects/' + this.props.match.params.id);
+    }
+
     // TODO:: debounce
     onChange: OnChange = value => {
-        this.setState({ v: value() });
+        this.setState({ body: value() });
     };
 
     onModalClose = () => {
@@ -121,19 +135,47 @@ export default class NewPost extends React.Component<
         });
     };
 
+    // shit code
+    onClickSave = () => {
+        if (!this.props.project) return;
+
+        const { _id: id } = this.props.project;
+
+        const payload = { title: this.state.title, body: this.state.body };
+        console.log('proj before', this.props.project);
+        this.props.addPostToProject(payload);
+        // TODO:: Use thunk :O
+        setTimeout(() => {
+            if (!this.props.project) return;
+
+            apis.updateProject(id, this.props.project);
+            console.log('proj after', this.props.project);
+
+            this.props.history.push('/projects/' + id);
+        }, 0);
+    };
+
+    onTitleChange = (e: any) => {
+        this.setState({ title: e.currentTarget.value });
+    };
+
     render() {
         return (
             <div className={styles.container}>
                 <div className={styles.header}>
                     <div className={styles.headerTextContainer}>
                         <input
+                            onChange={this.onTitleChange}
                             className={styles.headerTextInput}
                             placeholder="Title"
                         />
                         <span className={styles.headerTextDate}>
                             June 27, 2019 | Beomjun Gil @Affect Script
                         </span>
-                        <div className={styles.saveButton}>
+                        <div
+                            onClick={this.onClickSave}
+                            className={styles.saveButton}
+                        >
                             <DownloadIcon className={styles.saveIcon} />
                             <span className={styles.saveText}>SAVE</span>
                         </div>
@@ -217,3 +259,16 @@ const CommitHistory = () => {
         </div>
     );
 };
+
+function mapStateToProps(state: AppState) {
+    return { project: state.project.selectedProject };
+}
+
+const mapDispatch = {
+    addPostToProject
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatch
+)(NewPost);
