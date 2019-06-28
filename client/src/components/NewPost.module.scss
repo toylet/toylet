@@ -61,14 +61,17 @@
     width: 177px;
 
     border-radius: 42px;
-    box-shadow: 0 8px 16px 0 rgba(99, 174, 255, 0.5);
-    background-color: $primary;
+    box-shadow: 0 8px 16px 0 rgba($accent, 0.5);
+    background-color: $accent;
 
     padding: 18px 0;
 }
 
 .saveIcon {
     margin-left: 24px;
+    path {
+        fill: rgba($text, .8);
+    }
 }
 
 .saveText {
@@ -76,7 +79,7 @@
     font-size: 24px;
     font-weight: 600;
 
-    color: white;
+    color: rgba($text, .8);
 
     margin-left: 28px;
 }
@@ -238,7 +241,7 @@
 }
 
 .tipPoint {
-    margin-top: 36px;
+    margin-top: 0.8rem;
 
     font-family: 'Fredoka One', cursive;
     font-size: 24px;
@@ -246,6 +249,8 @@
 }
 
 .tipDesc {
+    margin-top: 1rem;
+
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 16px;
     color: rgba(12, 28, 45, 0.5);

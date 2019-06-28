@@ -6,9 +6,8 @@ import ConnectGitHubButton from './common/ConnectGitHubButton';
 
 import GitHubConnect from './GitHubConnect';
 
-import { ReactComponent as DownloadIcon } from '../svgs/download.svg';
 import { ReactComponent as GitHubIcon } from '../svgs/github.svg';
-import { ReactComponent as TipIcon } from '../svgs/tip.svg';
+import { ReactComponent as WriteIcon } from '../svgs/icon-write.svg';
 
 import styles from './NewPost.module.scss';
 import { connect } from 'react-redux';
@@ -150,7 +149,7 @@ class ProjectDetailWithPosts extends React.Component<
                             onClick={this.onClickSave}
                             className={styles.saveButton}
                         >
-                            <DownloadIcon className={styles.saveIcon} />
+                            <WriteIcon className={styles.saveIcon} />
                             <span className={styles.saveText}>WRITE</span>
                         </div>
                     </div>
@@ -228,20 +227,10 @@ class ProjectDetailWithPosts extends React.Component<
 
 const Tips = () => (
     <div className={styles.tips}>
-        <div className={styles.tipIcon}>
-            <TipIcon />
+        <div className={styles.tipPoint}>Description</div>
+        <div className={styles.tipDesc}>
+            Of all of the celestial bodies that capture our attention and fascination as astronomers, none has a greater influence on life on planet Earth than it’s own satellite, the moon. When you  influence of the moon comes from that origin as co for use to mine. This again, is something we can thank the presence of that lovely moon in the sky for.
         </div>
-        <span className={styles.tipTitle}>Logging tips</span>
-        <div className={styles.tipPoint}>1. Works Done</div>
-        <span className={styles.tipDesc}>
-            What were the tasks you've done today?
-        </span>
-        <div className={styles.tipPoint}>2. Issues</div>
-        <span className={styles.tipDesc}>
-            What were the problems or difficulties of doing today's project?
-        </span>
-        <div className={styles.tipPoint}>3. To-do</div>
-        <span className={styles.tipDesc}>What should you do next?</span>
     </div>
 );
 
